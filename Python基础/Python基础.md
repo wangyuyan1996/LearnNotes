@@ -606,11 +606,109 @@ if answer==num:
 										#小杨 2：02/04/04
 ```
 
+### 5.2 while
+
+​	所以 为了解决只能玩一次的尴尬，可以试试while循环。
+
+​	while是一种控制流语句 :kissing_smiling_eyes:
+
+```flow
+st=>start: kaishi
+io=>inputoutput: shuchu
+cond=>condition: tiaojian
+op=>operation: xunhuan
+e=>end: end
+
+st->io->cond
+cond(no)->e
+cond(yes)->op->cond 
+```
+
+while的英文，翻译过来，就是“当...的时候”
+
+程序执行到while的时候，当ture的时候，就去执行while的内部程序，当false的时候就跳过。
+
+语法和if一样，也需要冒号
+
+举个栗子
+
+```python
+#   coding: gbk
+a=1
+while a !=0:	# 回顾下 ‘！=’表示≠的意思
+    print('input！')
+    a=int(input())
+print('over')
+
+```
+
+所以上个游戏可以改良成循环的了 :smile:
+
+```python
+num=10
+print('input!')
+bingo=False
+
+while bingo==False:
+    answer=int(input())
+
+    if answer<num:
+        print('small')
+    if answer>num:
+        print('biggggg')
+    if answer==num:
+        print('bingoooooo!')
+        bingo=True
+
+```
 
 
 
+### 5.3 逻辑判断
 
+插播逻辑判断哈，上一章节 最后的代码里有啥子 False啥子很难懂的东西，这里要讲解下
 
+一个逻辑表达式，其实代表一个bool值
+
+```python
+1<3  	#这就是一个bool值，值为True
+2==3	#这就是False
+```
+
+把它们作为判断条件放在if 或者while的后面，就是根据他们的值来决定要不要执行。
+
+相同的栗子：
+
+```python
+a=1
+print(a>3) #false
+print(a==2-1) #true
+b=3
+print(a+b==2+2)	#true
+
+```
+
+```python
+#很容易混淆的两个概念
+a= False
+print(a)	#False
+print(a==False) #True
+```
+
+```python
+bingo=False #把bingo设置为一个False值
+bingo==False  #判断bingo的值 是不是False，如果是，那么这句话就是True
+```
+
+while在判断条件为True的时候要执行循环
+
+∵bingo==False	（看成两个未知数的等式）
+
+∴当比较出来的值 是False的时候，等式成立（为True）
+
+又∵等式为True的时候要执行循环
+
+∴循环。//老千层饼了
 
 
 
