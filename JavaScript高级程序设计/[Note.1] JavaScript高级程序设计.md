@@ -150,4 +150,5 @@ async属性与defer属性类似，都用于改变处理脚本的行为。与defe
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 ```
 > 准标准模式和标准模式非常接近，差异可以忽略不计
-
+<br />
+<br />
