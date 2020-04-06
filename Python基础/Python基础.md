@@ -1,7 +1,3 @@
-
-
-
-
 # 2020.4.2 Python 基础
 
 > 作者邮箱：yangjuehui06@outlook.com
@@ -12,16 +8,44 @@
 
 IDE：<u>idle</u> 为什么不用Pycharm，因为前面用不上（我也不会）
 
+## 0.前言（大佬勿看。。。）
+
+​	学编程呢，按照我自己的理解哈，其实就是在指挥计算机进行计算，所谓的编程语言的语法、算法实际上都是人为（大佬们）设定的规则，这些规则是帮助一般人（你我）来和计算机进行对话的，计算机只能帮助你计算，帮助你完成复杂的过程，并不能从0直接到1。意思就是说，如果你所做的一切，你都需要先“输入”再经过处理“输出”。
+
+​	学习编程最好你得现有一个宏观的概念，但是你的目标并不能定的太过于遥远，比如说你一开始学着赋值、变量、数据类型就想去写个微信、淘宝，那会非常让人崩溃。但是你可以先从最简单的小项目开始，就会很有趣。
+
+​	比如需求是你想要做一个”猜数字“的游戏，功能是这样的：预先输入一个数字作为你心里的数字，然后让另一个人不停的猜，比如心里数字输入50，如果你输入60，那么程序会回复‘多了！’，如果输入40，那么程序会恢复'少了！'，直到猜到正确的数字为止。这个程序是我入门C时候的第一个程序，当然用Python实现更加简单。
+
+​	我们现在假设这就是你需要独立制作的一个程序啦！我们来分析一下你应该做哪些工作.
+
+```python
+#你可以想象，程序其实就是一个盒子，你要设置好盒子里面的机关，然后输入然后通过机关再输出，emm，就像制作饼干的流水线，你得先放面团上去通过咔嚓咔嚓一顿操作，就变成饼干了
+#首先，你需要想办法让程序能接受你输入信息对吧，那么你就会用到 input（）啦
+#盒子里的内容咋设计呢，就像设置流水线一样要对你给的东西有反应把
+#我说1，你说2，这就是编程要学的内容（盒子的内部设计）
+#然后就要输出啊，一般来说，我们在IDE里面输出的内容，会在IDE里面直接展示对吧
+#这好像和用户拿到手上的游戏还有点距离啊总不能直接发代码给用户把
+#然后还要前端啦，设计点好看的界面啥的
+#然后还要封装啦，把他变成EXE，这样不就能运行啦
+
+```
+
+所以一开始，学习的所有知识其实都是在为后面的盒子的内部设计做铺垫，学习编程（后端），很多时候说的就是做盒子内部的东西（个人理解，勿盲从），那么就从学好一点点开始吧。
+
+
+
 ## 1.赋值、输出与输入
 
 ### 1.1	赋值
 
+
+
 ```python
-//赋值
-first=1
-second=2
+#赋值是基本了，将一个值赋给变量（他没有拒绝的权力），有时候人参就是这样唉
+first=1			#这就是把1丢给变量‘first’了
+second=2		#这里的‘first’‘second’都是自己命名的变量（按规则）
 third=3
-print(first+second-third)
+print(first+second-third) #print（）就是输出的意思啊啊!!
 ——
 -1
 
@@ -133,6 +157,12 @@ print(MinutePerWeek)
 name=input()
 print(name)
 ```
+
+
+
+
+
+
 
 ### 2.2	变量的命名方式
 
@@ -514,4 +544,297 @@ False
 #看看他们，都是好样的！（误）
 #这就是简单的逻辑判断，但是发现了嘛，他们所有的结果一起出来了！
 ```
+
+所以怎么才能让他们的内容有条件的显示出来呢
+
+
+
+## 5.逻辑判断与循环
+
+### 5.1	if
+
+if就是如果的意思，很明确。他可以让程序来自主判断输入是否满足条件，如果满足，那么执行下一步。反之如果不满足，那就会跳过。
+
+```flow
+st=>start: 开始框
+cond=>condition: 条件判断框
+op=>operation: 处理框
+io=>inputoutput: 输出
+eden=>end: 结束框
+st->cond(yes)->op->io->eden
+cond(no)->io
+```
+
+```python
+if 条件:			#记住 条件后面的冒号:不能少，而且必须是英文符号
+    执行语句
+    	if 条件：	#如果句内还要套if，那就再缩进
+```
+
+​	**及其重要的一点：！！if内部的语句需要一个统一的缩进！！（就是指每行开头的空格，省去了C等语言中的大括号），一般来说 用4个空格和一个TAB，但是请务必记住！！！整个文件请统一选择用tab或者空格，不然又是tab又是空格，很容易莫名其妙的报错！！！**
+
+eg：
+
+```python
+# coding: gbk
+age=int(input())  #上面那个gbk是中文编码规范，代码里有中文就要注释一下
+if age<=18:
+    print("you are a adult，你已经是个成年人啦!")
+======================== 
+17
+you are a adult, 你已经是个成年人啦！
+>>> 
+```
+
+那如果大于18岁也要生成呢？(自己想下)
+
+____fengexian____
+
+现在我们回到4.1.6最后那个小程序（也就是前言那个），hhh现在可以实施了
+
+```python
+#	coding:	gbk
+num=10
+print("你这个小辣鸡能猜到我在想什么嘛！！！")
+answer=int(input())
+if answer<num:
+    print("太小了吧蠢货！")
+if answer>num:
+    print("我能想这么大的数字吗？？")
+if answer==num:
+    print("运气而已，呵呵")
+```
+
+就这了，但是这个游戏只能玩一次啊喂，每次失败都要重新运行，能不能想个办法让他续上呢 [旺柴]
+
+```python
+#题外话一点，相信看到这里，应该算是入点小门了，由于本人最近Ddl严重，时间实在不允许这样写了，后面我就会写的简单些了，有啥不懂的群里直接问E哥哈^^
+										#小杨 2：02/04/04
+```
+
+### 5.2 while
+
+​	所以 为了解决只能玩一次的尴尬，可以试试while循环。
+
+​	while是一种控制流语句 :kissing_smiling_eyes:
+
+```flow
+st=>start: kaishi
+io=>inputoutput: shuchu
+cond=>condition: tiaojian
+op=>operation: xunhuan
+e=>end: end
+
+st->io->cond
+cond(no)->e
+cond(yes)->op->cond 
+```
+
+while的英文，翻译过来，就是“当...的时候”
+
+程序执行到while的时候，当ture的时候，就去执行while的内部程序，当false的时候就跳过。
+
+语法和if一样，也需要冒号
+
+举个栗子
+
+```python
+#   coding: gbk
+a=1
+while a !=0:	# 回顾下 ‘！=’表示≠的意思
+    print('input！')
+    a=int(input())
+print('over')
+
+```
+
+所以上个游戏可以改良成循环的了 :smile:
+
+```python
+num=10
+print('input!')
+bingo=False
+
+while bingo==False:
+    answer=int(input())
+
+    if answer<num:
+        print('small')
+    if answer>num:
+        print('biggggg')
+    if answer==num:
+        print('bingoooooo!')
+        bingo=True
+
+```
+
+解释下哈，有人问我问题了我很开心T_T
+
+在这个程序中，我们用了一个叫作bingo的变量，用于记录是否猜中了结果，请回顾while循环的初始概念：
+
+> 程序执行到while的时候，当ture的时候，就去执行while的内部程序，当false的时候就跳过。
+
+如果猜中了那就是True，如果没有猜中就是False，没有猜中就会执行循环体中的程序。
+
+在每次循环中，我i们都会输入answer，判断它是大是小是相等，所以在最后一句，bingo=True时候，如果他们相等，那么bingo==False这个循环条件就不成立了，于是程序就结束了。
+
+重点!这里的有双重循环， 所以千万要记得格式 空格！
+
+### 5.3 逻辑判断
+
+插播逻辑判断哈，上一章节 最后的代码里有啥子 False啥子很难懂的东西，这里要讲解下
+
+一个逻辑表达式，其实代表一个bool值
+
+```python
+1<3  	#这就是一个bool值，值为True
+2==3	#这就是False
+```
+
+把它们作为判断条件放在if 或者while的后面，就是根据他们的值来决定要不要执行。
+
+相同的栗子：
+
+```python
+a=1
+print(a>3) #false
+print(a==2-1) #true
+b=3
+print(a+b==2+2)	#true
+
+```
+
+```python
+#很容易混淆的两个概念
+a= False
+print(a)	#False
+print(a==False) #True
+```
+
+```python
+bingo=False #把bingo设置为一个False值
+bingo==False  #判断bingo的值 是不是False，如果是，那么这句话就是True
+```
+
+while在判断条件为True的时候要执行循环
+
+∵bingo==False	（看成两个未知数的等式）
+
+∴当比较出来的值 是False的时候，等式成立（为True）
+
+又∵等式为True的时候要执行循环
+
+∴循环。//老千层饼了
+
+
+
+### 5.4 random
+
+顾名思义，这就是随机数模块，是python自带的模块。
+
+
+
+引入模块的方法：写在开头,然后就可以用randint来生成随机数了
+
+```python
+from random import randint
+#通用 from 模块名 import 方法名
+```
+
+```python
+randint(5,10) #代表着5-10之间的随机数 包括5和10
+```
+
+还记得我们之前的弱智猜数字游戏吗，直接用随机数代替就好了。
+
+```python
+from random import randint
+num= randint(1,100)
+print('input!')
+bingo=False
+
+while bingo==False:
+    answer=int(input())
+
+    if answer<num:
+        print('small')
+    if answer>num:
+        print('biggggg')
+    if answer==num:
+        print('bingoooooo!')
+        bingo=True
+
+```
+
+
+
+
+
+### 5.5 变量的进阶思考
+
+```python
+#变量可以用来存储数据
+eg:
+num=10
+answer=input()
+#变量可以用来比较大小
+answer<num
+#变量还可以用来数学运算
+a=5
+b=a+3
+c=a+b
+```
+
+注意！:在python中，变量的运算顺序是
+
+1.先算等号右边的
+
+2.再把等号右边的赋值给左边//在计算中，遵循正常的数学运算规律
+
+```python
+a=4
+a=a+3
+print(a)
+```
+
+发现了吗，运算出来是7，既然如此，我们就可以用此方法记录我们一共猜了多少次数字！
+
+```python
+from random import randint
+num= randint(1,100)
+print('input!')
+bingo=False
+count=0
+
+while bingo==False:
+    count=count+1	#也可以写成 count+= 1
+    answer=int(input())
+
+    if answer<num:
+        print('small')
+    if answer>num:
+        print('biggggg')
+    if answer==num:
+        print('bingoooooo!')
+        bingo=True
+print('you have been used the piece of',count)
+
+```
+
+注意，一定要理解这个程序的结构，很重要
+
+所以我们来试试，数学家高斯同学小时候做过的题目，1+2+3+...+100=？
+
+```python
+num=1
+sum=0
+while num<=100:
+    sum=sum+num
+    num=num+1
+print(sum)
+
+#这个程序同样重要！！！！
+```
+
+
 
