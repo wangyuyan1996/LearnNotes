@@ -158,6 +158,12 @@ name=input()
 print(name)
 ```
 
+
+
+
+
+
+
 ### 2.2	变量的命名方式
 
 > 本来在之前细碎的写了，但是后面写东西的时候犯了这样的错误，遂过来补一下//2020.4.2
@@ -662,7 +668,17 @@ while bingo==False:
 
 ```
 
+解释下哈，有人问我问题了我很开心T_T
 
+在这个程序中，我们用了一个叫作bingo的变量，用于记录是否猜中了结果，请回顾while循环的初始概念：
+
+> 程序执行到while的时候，当ture的时候，就去执行while的内部程序，当false的时候就跳过。
+
+如果猜中了那就是True，如果没有猜中就是False，没有猜中就会执行循环体中的程序。
+
+在每次循环中，我i们都会输入answer，判断它是大是小是相等，所以在最后一句，bingo=True时候，如果他们相等，那么bingo==False这个循环条件就不成立了，于是程序就结束了。
+
+重点!这里的有双重循环， 所以千万要记得格式 空格！
 
 ### 5.3 逻辑判断
 
@@ -709,6 +725,116 @@ while在判断条件为True的时候要执行循环
 又∵等式为True的时候要执行循环
 
 ∴循环。//老千层饼了
+
+
+
+### 5.4 random
+
+顾名思义，这就是随机数模块，是python自带的模块。
+
+
+
+引入模块的方法：写在开头,然后就可以用randint来生成随机数了
+
+```python
+from random import randint
+#通用 from 模块名 import 方法名
+```
+
+```python
+randint(5,10) #代表着5-10之间的随机数 包括5和10
+```
+
+还记得我们之前的弱智猜数字游戏吗，直接用随机数代替就好了。
+
+```python
+from random import randint
+num= randint(1,100)
+print('input!')
+bingo=False
+
+while bingo==False:
+    answer=int(input())
+
+    if answer<num:
+        print('small')
+    if answer>num:
+        print('biggggg')
+    if answer==num:
+        print('bingoooooo!')
+        bingo=True
+
+```
+
+
+
+
+
+### 5.5 变量的进阶思考
+
+```python
+#变量可以用来存储数据
+eg:
+num=10
+answer=input()
+#变量可以用来比较大小
+answer<num
+#变量还可以用来数学运算
+a=5
+b=a+3
+c=a+b
+```
+
+注意！:在python中，变量的运算顺序是
+
+1.先算等号右边的
+
+2.再把等号右边的赋值给左边//在计算中，遵循正常的数学运算规律
+
+```python
+a=4
+a=a+3
+print(a)
+```
+
+发现了吗，运算出来是7，既然如此，我们就可以用此方法记录我们一共猜了多少次数字！
+
+```python
+from random import randint
+num= randint(1,100)
+print('input!')
+bingo=False
+count=0
+
+while bingo==False:
+    count=count+1	#也可以写成 count+= 1
+    answer=int(input())
+
+    if answer<num:
+        print('small')
+    if answer>num:
+        print('biggggg')
+    if answer==num:
+        print('bingoooooo!')
+        bingo=True
+print('you have been used the piece of',count)
+
+```
+
+注意，一定要理解这个程序的结构，很重要
+
+所以我们来试试，数学家高斯同学小时候做过的题目，1+2+3+...+100=？
+
+```python
+num=1
+sum=0
+while num<=100:
+    sum=sum+num
+    num=num+1
+print(sum)
+
+#这个程序同样重要！！！！
+```
 
 
 
