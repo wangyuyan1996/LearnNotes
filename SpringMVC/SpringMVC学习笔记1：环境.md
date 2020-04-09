@@ -55,7 +55,7 @@ echo $JAVA_HOME
 
 #### 0.3.2 配置Maven环境
 
-终端输入：
+* 终端输入：
 
 ```shell
 vim ~/.zshrc
@@ -70,7 +70,30 @@ source ~/.zshrc
 mvn -v
 ```
 
+* 进入Eclipse安装Maven插件：
 
+  `Help->Install New Software->Add.`，Name输入：m2e；Location输入：http://download.eclipse.org/technology/m2e/releases，点Add，等待插件安装完成。（可进入Eclipse->About Eclipse->Installation detail查看是否安装好）
+
+* 进入自己Maven安装目录下的conf文件夹，找到`settings.xml`文件，编辑器打开，找到`<mirrors>`标签，加入以下代码设置国内镜像，否则Maven下载依赖包会无敌无敌慢：
+
+  ```xml
+  <mirror>
+        <id>alimaven</id>
+        <mirrorOf>central</mirrorOf>
+        <name>aliyun maven</name>
+       <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+      </mirror>
+  ```
+
+  
+
+* 进入`Eclipse->Preferences->Maven->User Settings`设置好自己的Maven的settings.xml文件：
+
+  ![](images/1.0.3.2.0.png)
+
+  
+
+* 创建一个Maven项目：`File->New->Other->Maven Project`，然后Next，Next创建好就Ok，此时务必保持网络通畅，因为Maven需要在创建项目安装更新依赖包。PS：如果中断了怎么办：把项目Clean一次，再Update Project。
 
 ## 1 导入Spring Web MVC包依赖
 
@@ -80,10 +103,10 @@ mvn -v
 
 ![](images/1.0.4.png)
 
-在Eclipse中创建Maven工程，在工程的pom.xml中加入复制的代码
+在Eclipse中创建Maven工程，在工程的pom.xml中加入复制的代码，在代码外用`<dependencies>`包上：
 
-![](images/1.0.4.2.png)
+![](images/1.1.0.png)
 
-
+保存后会自动添加Spring Web MVC依赖包。
 
 如无意外，到此就配置好了，下一篇我们将进入正式学习。
