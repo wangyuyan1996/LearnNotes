@@ -838,3 +838,241 @@ print(sum)
 
 
 
+### 5.6 for
+
+这是另外一种循环语句即
+
+```python
+for...in...
+```
+
+
+
+如果用for循环表示从1输出到100：
+
+```python
+for num in range(1,101):
+    print(num)
+```
+
+注意，range（1，101）表示从一开始，到101为止（不包括101，注意这里和 randint 不一样），取其中所有的整数。
+
+**for num range(1, 101)** 就是说，把这些数，依次赋值给变量num。
+
+所以，当你需要一个循环10次的循环，你就只需要写：
+
+```python
+for num range(1,11)
+#或者for num range(0,10)
+#for num range(0,n) 一个循环n次的循环
+```
+
+for 循环的本质是对一个序列中的元素进行遍历。什么是序列，以后再说。先记住这个最简单的形式：
+
+```python
+for num in range(a,b)
+```
+
+就是从 a 循环至 b-1
+
+
+
+### 5.7 循环的嵌套
+
+设想一样，如果我们要输出5个SOS for 循环可以这么写：
+
+```python
+for num in range(0,5): #一定要记得 冒号，刚才忘记强调了
+    print('*')
+```
+
+如果想让这5个*在同一行，需要加上 end 参数，使得 print 之后不换行：
+
+```python
+for num in range(0, 5):
+    print('*', end=' ')
+```
+
+ 
+
+现在，如果我想要这样一个图形，怎么办？
+
+```python
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+#或者如果我要这样的怎么办？
+*
+**
+***
+****
+*****
+```
+
+除了你自己动手打好一个多行字符串外，也可以让程序帮我们解决这种问题，我们需要的是两个嵌套在一起的循环：
+
+```python
+for num in range(0, 3):
+    for num1 in range(0, 3):
+        print(num, num1)
+#第二个 for 循环在第一个 for 循环的内部，表示每一次外层的循环中，都要进行一整遍内层的循环。
+
+#print 里面用逗号分割，可以连续输出多个不同的值。
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test7.py 
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+>>> 
+#内层循环中的 print 语句一共被执行了 9 次。
+
+#num 从0到2循环了3次。对应于每一个 num 的值，num1 又做了从0到2三次循环。所以3*3一共9次。
+```
+
+所以如果要输出一个5*5的方阵图案，我们可以
+
+```python
+for num in range(0, 5):
+    for num2 in range(0, 5):
+        print('*', end=' ')
+    print()
+```
+
+注意：第二个 print 的缩进和内层的 for 是一样的，这表明它是不是内层 for 循环中的语句，每次 num 的循环中，它只会在内循环执行完之后执行一次。
+
+print 的括号里没有写任何东西，是起到换行的作用，这样，每输出5个*，就会换行。
+
+要输出第二个三角图案时，我们需要根据当前外层循环的序数，设置内层循环应当执行的次数。
+
+```python
+for num in range(0, 5):
+    for num2 in range(0, num+1):
+        print('*', end=' ')
+    print()
+```
+
+ 
+
+内层的j每次从0到 num+1 进行循环。
+
+这样，当第一次 num=0 时，num2 就是 range(0,1)，只输出1个*。
+
+而当最后一次 num=4 时，num2 就是 range(0,5)，输出5个*。
+
+
+
+## 6.字符串
+
+### 6.1 字符串基础
+
+字符串就是一组字符的序列（坚定）
+
+字符串 最基础的部分在前面变量那边有写过，这里不赘述了。
+
+总所周知，字符串既可以单引号也可以双引号的
+
+在字符串的内部，如果要使用引号，就可以使用外引号相异的引号
+
+```python
+'hellow "fking" world' #这就是内容带有引号的字符串
+```
+
+还有一种是 用\来表示引号，可以不受引号限
+
+**\\'** 表示单引号，**\\"** 表示双引号
+
+**\** 被称作**转义字符**，除了用来表示引号，还有比如用
+
+- ***\*\n\** 表示字符串中的换行（相当于按一下回车键的效果）**
+- ***\*\t\** 表示字符串中的制表符（相当于按一下tab键的效果）**
+- ***\*\\*\* 表示字符串中的 \**\*\*** （因为单个斜杠被用来做转义了，所以真的要表示 \ 字符，就要两个斜杠）
+
+\的用处很多，还有一种是在代码中来换行，而不影响效果：
+
+```python
+'this is the \
+same line'
+#这个字符串和 'this is the same line'是一模一样的,如果有天要写一行很长的代码，就可以用上了
+```
+
+
+
+### 6.2 字符串格式化
+
+我们在输出字符串的时候，如果想对输出的内容进行一些整理，比如把几段字符拼接起来，或者把一段字符插入到另一段字符中间，就需要用到**字符串的格式化输出**。
+
+如果你想要把三两个字符段连接起来
+
+```python
+str1='good'
+str2='bye'
+str3='baby!'
+print(str1+str2+str3)
+#或者甚至字符变量和字符串相加
+print(str1+str2+'my'+str3)
+
+```
+
+```python
+#或者是数字加文字？
+num=18
+print('my age is '+num)
+
+
+#hahhahah 这样会报错了哈哈哈
+#正确方式是用str（）把数字转换成字符串
+print('my age is'+str(num))
+```
+
+```python
+#另一种方法就是用 % 对字符串进行格式化
+num=18
+print('my age is %d' %num)
+
+#输出的时候，原始字符串中的 %d 会被 % 后面的值替换。相当于替身玩偶，哈哈
+#但是%d 只能用来替换整数。如果你想格式化的数值是小数，要用 %f,如果你想保留两位小数，需要在f前面加上条件：%.2f
+print('num is %.2f' % 4.99)
+```
+
+```python
+#可以用 %s 来替换一段字符串
+item='course'
+print('this %s is very good!'% item)
+```
+
+注意区分：有引号的表示一段字符，没有引号的就是一个变量，这个变量可能是字符，也可能是数字，但一定要和%所表示的格式相一致。
+
+
+
+OK. 这时候 我们再试试把之前的沙雕小游戏改造一下
+
+```python
+from random import randint
+num= randint(1,100)
+print('input!')
+bingo=False
+count=0
+
+while bingo==False:
+    count=count+1	#也可以写成 count+= 1
+    answer=int(input())
+
+    if answer<num:
+        print('%d is so small' % answer)
+    if answer>num:
+        print('%d is so biggggg' % answer)
+    if answer==num:
+        print('%d is real bingoooooo!' %answer)
+        bingo=True
+print('you have been used the piece of',count)
+
+```
+
