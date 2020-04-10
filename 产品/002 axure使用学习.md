@@ -234,8 +234,55 @@ axure拥有丰富的函数，但是大部分时候是不会用到的。熟悉Axu
 # 四、使用说明
 
 * axure基础教程：https://www.axure.com.cn/axure/course/
+
 * axure教程：https://www.axure.com.cn/axure/
+
 * axure 8.0教程：http://www.iaxure.com/category/axurerp8-0%E6%95%99%E7%A8%8B
+
 * w3cschool教程（过时了）：https://www.w3cschool.cn/axurezwjc/
+
+* 《AxureRP9萌新修炼手册》电子书PDF版小楼老师出品Axure入门教材：
+
+  https://www.pmyes.com/thread-35049.htm
+
+# 五、模板资料
+
+* 产品入门级常用模板资料：https://www.pmyes.com/thread-143.htm
 * 
+
+# 六、工具间横向对比
+
+在我看来，Mockplus与Axure的区别，就像是Meitu和PS的区别。
+
+Mockplus制作的原型，交互方面比较简单，而axure可以高仿真度的模拟。对于与技术开发的沟通一般Mockplus制作的原型就够了，而对于一些不懂技术的人群Axure制作仿真度高的原型更易于理解。建议学习Axure以适应更多应用场景。
+
+Mockplus
+Mockplus（摩客）是一款简洁快速的原型图设计工具。适合软件团队、个人在软件开发的设计阶段使用。其低保真、无需学习、快速上手、功能够用。并能够很好地表达自己的设计。
+
+Axure
+Axure RP是一个专业的快速原型设计工具。Axure（发音：Ack-sure），代表美国Axure公司；RP则是Rapid Prototyping（快速原型）的缩写。
+
+Axure RP是美国Axure Software Solution公司旗舰产品，是一个专业的快速原型设计工具，让负责定义需求和规格、设计功能和界面的专家能够快速创建应用软件或Web网站的线框图、流程图、原型和规格说明文档。作为专业的原型设计工具，它能快速、高效的创建原型，同时支持多人协作设计和版本控制管理 。
+
+Axure RP的使用者主要包括商业分析师、信息架构师、产品经理、IT咨询师、用户体验设计师、交互设计师、UI设计师等，另外，架构师、程序员也在使用Axure。
+
+从整体观感上来看，Axure像一张美术素描纸，没有构思好不敢下笔，怕破坏界面的美感。 
+而Mockplus 像是一个手写板，随意涂改，也不会觉得有什么可惜。
+
+从细节上看，Mockplus 在组件面板的优化比 Axure 好很多。Axure虽然把常用组件的放在上面了，但在具体使用时需要经常上下滑动，翻找组件和图标。
+
+Mockplus设计了组件、图标、收藏、母版的 Tab，切换起来很方便。 
+还筛选了一部分常用的组件固定在组件库上面，实现高频操作不用找。 
+另外这个折叠面板很棒，不用纠结展开和关闭的问题。
+
+所以 
+低保真用 MockPlus ，快。 
+高保真用 Axure，精致。
+
+如果你的需求是：非常强大，实现非常多的交互功能，不怕时间长，就是要效果与实际APP的像素级一致，那么Axure是你的唯一选择；
+
+如果你的需求是：就是要快，很快出原型，很方便的演示，那么Mockplus是你的最佳选择。
+————————————————
+版权声明：本文为CSDN博主「xuaner1996」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/xuaner1996/article/details/80013651
 
