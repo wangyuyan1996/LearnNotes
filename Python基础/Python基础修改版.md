@@ -1,10 +1,22 @@
-# 2020.4.2 Python 基础
+# 2020.4.14 Python 基础
 
 > 作者邮箱：yangjuehui06@outlook.com
 >
 > 参考书目：《父与子的编程之旅》《笨方法学Python》
 >
 > git: https://github.com/weiyuchens/LearnNotes
+
+## 0.更新日志
+
+我决定搞一个更新日志，每天码字完都记录下，因为我都是在同一个文件里迭代 xixi
+
+/**2020.4.14 更新了函数的前三个小节，补全了前面一点描述，哈哈*/ 
+
+
+
+
+
+
 
 <u>基于Python3.6.8</u> 安装和部署环境不再赘述
 
@@ -18,7 +30,7 @@ IDE：<u>idle</u> 为什么不用Pycharm，因为前面用不上
 
 //未来的儿子/女儿啊，写代码好累啊，以后千万学个艺术啥的啊[挥泪]
 
-## 0.前言（大佬勿看。。。）
+## 0.前言（大佬勿看请跳过）
 
 ​	学编程呢，按照我自己的理解哈，其实就是在指挥计算机进行计算，所谓的编程语言的语法、算法实际上都是人为（大佬们）设定的规则，这些规则是帮助一般人（你我）来和计算机进行对话的，计算机只能帮助你计算，帮助你完成复杂的过程，并不能从0直接到1。意思就是说，如果你所做的一切，你都需要先“输入”再经过处理“输出”。
 
@@ -1182,4 +1194,257 @@ if a != '':
 ```
 
 
+
+## 7.函数
+
+还记得数学上的函数是什么意思嘛，就是给定一个a，就会有唯一输出的一种对应关系F(a)。在Python以及其他编程语言中，函数也是这个意思，但是有部分有略微不同。
+
+编程中所说的函数，就是一堆语句组成的语句块，这个语句块有个名字，你可以在需要时反复地使用这块语句。它**有可能**需要输入，**有可能**会返回输出。
+
+> 举一个现实中的场景：我们去餐厅吃饭，跟服务员点了菜，过了一会儿，服务员把做好的菜端上来。
+>
+> 1. 餐厅的厨房就可以看作是一个函数
+> 2. 我们点的菜单，就是给这个函数的参数（对函数来说就是输入）
+> 3. 厨师在厨房里做菜的过程就是这个函数的执行过程
+> 4. 做好的菜是返回结果，返回到我们的餐桌上（函数的返回值）
+
+我们之前用的input和range就是python中的函数
+
+打个比方，range()这是一个函数，range(1,10)中的1和10就是你输入的参数，而生成的结果就是这个函数的返回结果。
+
+> 我发现我之前并没有很好的解释range函数，现在插播一下
+>
+> 1.它表示的是左闭右开区间
+>
+> 2.它接收的参数必须是整数，可以是负数，但不能是浮点数等其它类型；
+>
+> 3.它是不可变的序列类型，可以进行判断元素、查找元素、切片等操作，但不能修改元素；
+>
+> 4.它是可迭代对象，却不是迭代器  #这条可以不用理解，难解释
+
+这里相当于range()就是厨房，1和10就是你点的菜，出来的结果就是返回到你桌上的菜
+
+```Python
+for num in range (1,10):
+    print(num)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+>>> 
+```
+
+除了python自带的函数以外，我们还可以自己定义函数，python定义一个函数的关键词是def，即define的缩写。
+
+```python
+def goodbye():
+    print ("please donnot leave me！")
+```
+
+这时候就相当于你定义了一个名字叫goodbye的函数，后面的括号是需要输入的参数，而这里定义的时候并没有填写，是表示不需要参数。下面缩进的代码块就是函数的内容，也叫他函数体。
+
+然后这时候我们去调用它：
+
+```python
+def goodbye():
+    print ("please donnot leave me！")
+
+goodbye()
+
+ 
+please donnot leave me！
+>>> 
+
+```
+
+### 7.1 函数的参数
+
+​	在第7章里，我们讲了怎样定义一个自己的函数，但我们没有给他提供输入**参数**的功能。不能指定参数的函数就好比你去餐厅吃饭，服务员告诉你，不能点菜，有啥吃啥。这显然不能满足很多情况。
+
+ 所以，如果我们希望自己定义的函数里允许调用者提供一些参数，就把这些参数写在括号里，如果有多个参数，用逗号隔开，如：
+
+```python
+def cheat(victim):
+   print(victim + ', please donnot leave me！')
+
+```
+
+或者
+
+```python
+def plus(num1, num2):
+   print(num1+num2)
+```
+
+
+
+```python
+#请注意!,在第一个例子里，victim是一个变量，他并不是字符串，例子如下：
+
+def cheat(victim):
+   print(victim + ', please donnot leave me！')
+
+cheat("xiaoyang")
+
+#也就是说，这里的victim，是要求你输入一个名字！，而不是让你傻傻的输入 victim 初学的时候我踩过的坑TVT
+```
+
+
+
+### 7.2 函数应用细节
+
+我发现我上一段写的不怎么好，所以我准备举个例子讲讲：
+
+还记得我们之前的 那个弱鸡小游戏嘛，hahah，拿来废物利用下
+
+我希望我自己能定义一个函数，然后判断输入数值的大小
+
+```python
+def contrast(num1,num2):
+    if num1<num2:
+        print('num1 is too small!')
+        return False
+    if num1>num2:
+        print('num1 is too big！')
+        return False
+    if num1==num2:
+        print('bingo!')
+        return True
+contrast(8798692659,84092774534)
+
+```
+
+这里说一下，**return** 是函数的结束语句，return 后面的值被作为这个函数的**返回值**。函数中任何地方的 return 被执行到的时候，这个函数就会立刻结束并跳出。
+
+注意：函数的 **返回值** 和我们前面说的 输出 是两回事。print 输出是将结果显示在控制台中，最终一定是转成字符类型；而 返回值，是将结果返回到调用函数的地方，可以是任何类型。
+
+那我们把那个沙雕游戏拿出来溜溜吧：
+
+```python
+def contrast(num1,num2):
+    if num1<num2:
+        print('is too small!')
+        return False
+    if num1>num2:
+        print('is too big！')
+        return False
+    if num1==num2:
+        print('bingo!')
+        return True
+
+from random import randint
+num=randint(1,100)
+print('Guess what i think?')
+bingo=False
+while bingo==False:   #这里就是 ，当bingo的值是False的时候，就会一直循环，反之则输出
+    answer = int(input())
+    bingo = contrast(answer,num)
+```
+
+当然，函数只要定义了。是可以重复使用滴！
+
+
+
+### 7.3 循环的进阶应用
+
+我之前，不太想写，一是因为那天懒病发作，二是因为确实内容太多估计记不住，今天就拿着一起讲哈
+
+可以回顾下，5.1那章节，除了我们讲过的用法，他还可以配合elif和else来使用
+
+if，如果条件满足，就做xxx，否则就不做。
+
+else就是“否则”，就xxx
+
+```flow
+st=>start: 开始框
+cond=>condition: if
+op1=>operation: 处理程序1号
+op2=>operation: 处理程序2号
+io=>inputoutput: 输出
+eden=>end: 结束框
+st->cond
+cond(true)->op1->io
+cond(false)-else->op2->io
+```
+
+当if后面的条件语句不满足时，与之相对应的 else 中的代码块将被执行。
+
+```python
+if a == 1:
+   print('right')
+else:
+   print('wrong')
+```
+
+ elif 意为 else if，含义就是：“否则如果”条件满足，就做yyy。elif 后面需要有一个逻辑判断语句。
+
+```flow
+st=>start: 开始框
+cond=>condition: if
+cond2=>condition: elif
+op1=>operation: 处理程序1号
+op2=>operation: 处理程序2号
+io=>inputoutput: 输出
+ed=>end: 结束框
+st->cond
+cond(true)->op1->io
+cond(false)->cond2(true)->op2->io
+cond2(false)->io
+```
+
+当if条件不满足时，再去判断 elif 的条件，如果满足则执行其中的代码块：
+
+```python
+if a == 1:
+   print ('one')
+elif a == 2:
+   print ('two')
+```
+
+ 
+
+if, elif, else 可组成一个整体的条件语句。
+
+1. if 是**必须有**的；
+2. elif **可以没有，也可以有很多个**，每个elif条件不满足时会进入下一个elif判断；一旦满足，执行完就结束整个条件语句；
+3. else **可以没有，如果有的话只能有一个**，**必须在条件语句的最后。**
+
+```python
+if a ==1:
+   print('one')
+elif a==2:
+   print('two')
+elif a == 3:
+   print ('three')
+else:
+   print ('too many')
+```
+
+我们昨天刚改写的小游戏中的函数contrast，用了三个条件判断，我们可以再改写成一个包含 if...elif...else 的结构：
+
+```python
+def contrast(num1, num2):
+   if num1<num2:			
+       print ('too small')	#如果满足，那么输入too small，并且返回False值
+       return False;
+   elif num1>num2:			#如果if不满足，那么来判断这里
+       print ('too big')	#如果满足，则输出too big，并且返回False
+       return False;
+   else:					#如果上面这两个都不满足，那么输出bingo，返回True值
+       print ('bingo')
+       return True
+
+from random import randint
+num=randint(1,100)
+print('Guess what i think?')
+bingo=False
+while bingo==False:   #这里就是 ，当bingo的值是False的时候，就会一直循环，反之则输出
+    answer = int(input())
+    bingo = contrast(answer,num)
+```
 
