@@ -1506,7 +1506,7 @@ else:
 从流程图来看，就是
 
 ```flow
-=>start: start
+st=>start: start
 cond1=>condition: x>=0
 cond2=>condition: y>=0
 cond3=>condition: y<0
@@ -1693,3 +1693,518 @@ del l[3]
 
 
 
+### 8.2 list切片 （重头戏）
+
+list有两类最常用的操作，**索引（index）**和**切片（slice）**
+
+我们说的用[]加序号访问的方法就是索引操作。
+
+ 
+
+除了指定位置进行索引外，list还可以处理负数的索引。继续用昨天的例子：
+
+```python
+l = ["orderabowlof","malaxiangguo",778,True]
+```
+
+ 
+
+**l[-1]表示l中的最后一个元素。**
+
+**l[-3]表示倒数第3个元素。**
+
+切片操作，是在[]内提供一对可选数字，用:来分割。冒号前的数表示切片的开始位置，冒号后的数字表示切片到哪里结束。同样，计数从0开始。
+
+注意：开始位置包含在切片中，而结束位置不包括。
+
+ 
+
+```python
+l[1:3]
+```
+
+得到的结果是["malaxiangguo", 778]。
+
+这个沙雕玩意是不是很难理解。。
+
+我想个办法转述一哈
+
+比如说现在有一个list
+
+```python
+l=[1,2,3,4,5,6,7,8,9]
+```
+
+OK, 那我们现在要取前三个元素咋办
+
+笨办法：
+
+```python
+>>> [l[0],l[1],l[2]]
+[1,2,3]
+>>> 
+```
+
+但是如果要按照切片来做怎么办，大家可以再重新的去看上面的那个概念：
+
+> 切片操作，是在[]内提供一对可选数字，用:来分割。冒号前的数表示切片的开始位置，冒号后的数字表示切片到哪里结束。同样，计数从0开始。
+>
+> 注意：开始位置包含在切片中，而结束位置不包括。
+
+```python
+>>> l[0:3]
+[1, 2, 3]
+>>> 
+```
+
+为啥是[0:3]?
+
+首先，第一，0是list的第一个元素，3是第四个元素，其次结束的位置不包括
+
+所以是[0:3]  **这个非常重要，我之前一直混淆，一定要记清楚**，建议自己写个表练习练习
+
+如果不指定第一个数，切片就从列表第一个元素开始。
+
+如果不指定第二个数，就一直到最后一个元素结束。
+
+都不指定，则返回整个列表。
+
+```python
+l[:3]
+l[1:]
+l[:]
+```
+
+注意：不管是返回一部分，还是整个列表，都是一个新的对象，与不影响原来的列表。
+
+ 
+
+同索引一样，切片中的数字也可以使用负数。比如：
+
+```python
+>>> l[1:-1]
+[2, 3, 4, 5, 6, 7, 8]
+>>> 
+```
+
+++++++
+
+沙雕小游戏环节：
+
+还是那个罚球小游戏，然他循环5次，然后记录下得分，先不判断胜负
+
+```python
+from random import choice
+
+score_you = 0
+score_com = 0
+direction = ['left', 'center', 'right']
+
+for i in range(5):
+   print ('==== Round %d - You Kick! ====' % (i+1))
+   print ('Choose one side to shoot:')
+   print ('left, center, right')
+   you = input()
+   print ('You kicked ' + you)
+   com = choice(direction)
+   print ('Computer saved ' + com)
+   if you != com:
+       print ('Goal!')
+       score_you += 1
+   else:
+       print ('Oops...')
+   print ('Score: %d(you) - %d(com)\n' % (score_you, score_com))
+
+   print ('==== Round %d - You Save! ====' % (i+1))
+   print ('Choose one side to save:')
+   print ('left, center, right')
+   you = input()
+   print ('You saved ' + you)
+   com = choice(direction)
+   print ('Computer kicked ' + com)
+   if you == com:
+       print ('Saved!')
+   else:
+       print ('Oops...')
+       score_com += 1
+   print ('Score: %d(you) - %d(com)\n' % (score_you, score_com))
+
+```
+
+
+
+### 8.3 字符串的分割
+
+字符串和列表有很多不得不说的故事，比如python很多人的第一个项目，就是抓取网站的某个链接，那么就涉及到对网站的代码处理。再处理代码的过程中，字符串与list之间的操作是不可避免的。
+
+
+
+比如说，你现在看到了一个英语句子，你想抓取中间的所有单词。
+
+```python
+sentence='I love Xiaoyang everyday'
+#这时候就要对字符串进行分割了
+>>> sentence.split()
+
+['I', 'love', 'Xiaoyang', 'everyday']
+>>> 
+```
+
+split()能将字符串按照空格分隔开，并且组成一个由各个单词字符串组成的list
+
+除了空格外，split()同时也会按照换行符**\n**，制表符**\t**进行分割。所以应该说，split默认是按照**空白字符**进行分割。
+
+ 
+
+之所以说默认，是因为split还可以指定分割的符号。比如你有一个很长的字符串
+
+ 
+
+```python
+section = 'Hi. I am the one. Bye.'
+```
+
+ 
+
+通过指定分割符号为'.'，可以把每句话分开
+
+ 
+
+```python
+section.split('.')
+```
+
+ 
+
+得到
+
+ 
+
+```python
+['Hi', ' I am the one', ' Bye', '']
+```
+
+ 
+
+这时候，'.'作为分割符被去掉了，**而空格仍然保留在它的位置上**。
+
+注意最后那个空字符串。每个'.'都会被作为分割符，即使它的后面没有其他字符，也会有一个空串被分割出来。例如
+
+ 
+
+```python
+'aaa'.split('a')
+```
+
+ 
+
+将会得到['', '', '', '']，由四个空串组成的list。
+
+
+
+### 8.4 连接list
+
+emmm.既然有分割，当然也有连接。
+
+这里就要用到join
+
+join的格式还挺怪的，他并不是list所包含的方法，而是字符串的方法。
+
+所以你需要拥有一个字符串作为list中所有元素的连接符，然后再调用连接符join
+
+
+
+```python
+s=' '
+l=['apple','juice','good']
+fruit= s.join(l)
+print(fruit)
+>>>
+apple juice good
+>>> 
+```
+
+或者也可以在shell中输入：
+
+```python
+>>> ' '.join(['apple','juice','good'])
+'apple juice good'
+>>> 
+```
+
+结果是一样的
+
+当然，如果你冒号中，没有空格，那么字符串就是无缝连接
+
+### 8.5 字符串的索引和切片
+
+**1.遍历**
+
+前面讲过，list是可以由for...in来遍历的，实际上字符串也可以这样被遍历
+
+```python
+word= 'hellowworld'
+for c in word:
+    print(c)
+>>>
+h
+e
+l
+l
+o
+w
+w
+o
+r
+l
+d
+>>> 
+```
+
+**2.索引**
+
+可以通过[]来索引访问字符串中的某个字符
+
+```python
+print(word[1])
+print(word[-1])
+#你们不会忘了是从0开始的吧，不会吧不会吧
+```
+
+和list不同，字符串不能通过访问去修改期中的字符！
+
+
+
+**3.切片**
+
+可以通过两个序号，来截取其中的某段，具体规则和list相同
+
+```python
+print (word[5:7])
+print (word[:-5])
+print (word[:])
+```
+
+**4. 连接字符**
+
+join方法也可以对字符串使用，作用就是用连接符把字符串中的每个字符重新连接成一个新字符串。
+
+```python
+newword = ','.join(word)
+```
+
+## 9.文件读取与处理
+
+### 9.1 文件的读取
+
+之前，我们写的程序绝大多数都依赖于从命令行输入。假如某个程序需要输入很多数据，比如一次考试的全班学生成绩，再这么输就略显痛苦了。一个常见的办法就是把学生的成绩都保存在一个文件中，然后让程序自己从这个文件里取数据。
+
+ 
+
+要读取文件，先得有文件。我们新建个文件，就叫它data.txt。在里面随便写上一些话，保存。把这个文件放在接下来你打算保存代码的文件夹下，这么做是为了方便我们的程序找到它。准备工作就绪，可以来写我们的代码了。
+
+打开一个文件的命令很简单：
+
+```python
+open('文件名')
+```
+
+这里的文件名可以用文件的完整路径，也可以是相对路径。因为我们把要读取的文件和代码放在了同一个文件夹下，所以只需要写它的文件名就够了。
+
+```python
+f = open('data.txt')
+```
+
+ 
+
+但这一步只是打开了一个文件，并没有得到其中的内容。变量f保存了这个文件，还需要去读取它的内容。你可以通过**read()**函数把文件内所有内容读进一个字符串中。
+
+```python
+data = f.read()
+```
+
+ 
+
+做完对文件的操作之后，记得用**close()**关闭文件，释放资源。虽然现在这样一个很短的程序，不做这一步也不会影响运行结果。但养成好习惯，可以避免以后发生莫名的错误。
+
+注意：close() 一定要有后面的括号，不然就没有调用这个函数。
+
+ 
+
+完整程序示例：
+
+```python
+f = open('data.txt')
+data = f.read()
+print (data)
+f.close()
+```
+
+**这里特么的会报错啊！！！！！！**
+
+```python
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xae in position 10: illegal multibyte sequence
+>>> #错误代码
+```
+
+这个问题主要是由于你的文件就是那个txt是gbk编码！
+
+解决方法：
+
+```python
+#在代码的开头，放上
+import _locale
+_locale._getdefaultlocale = (lambda *args: ['zh_CN', 'utf8'])
+```
+
+> https://blog.csdn.net/blmoistawinde/article/details/87717065
+
+
+
+### 9.2 文件写入
+
+和把大象关进冰箱一样，写文件也需要三步：
+
+1. 打开文件；
+2. 把内容写入文件；
+3. 关闭文件。
+
+ python默认是以**只读模式**打开文件。如果想要写入内容，在打开文件的时候需要指定打开模式为写入：
+
+```python
+f = open('output.txt', 'w')
+```
+
+'w'就是writing，以这种模式打开文件，原来文件中的内容会被你新写入的内容覆盖掉，**如果文件不存在，会自动创建文件**。
+
+之前不加参数时，open的模式默认为'r'，reading，只读模式，文件必须存在，否则引发异常。
+
+另外还有一种常用模式是'a'，appending。它也是一种写入模式，但你写入的内容不会覆盖之前的内容，而是添加到原有文件内容后面。
+
+ ```python
+words= 'i will kill you !' 
+
+put = open('fast.txt','w')
+
+put.write(words)
+
+put.close()
+
+ ```
+
+
+
+### 9.3 处理文件中的数据
+
+
+我们已经知道了如何读取和写入文件。有了这两个操作文件的方法，再加上对文件内容的处理，就能写一些小程序，解决不少日常的数据处理工作。 
+
+比如我现在拿到一份文档，里面有某个班级里所有学生的平时作业成绩。因为每个人交作业的次数不一样，所以成绩的数目也不同，没交作业的时候就没有分。我现在需要统计每个学生的平时作业总得分。
+
+ 记得我小的时候，经常有同学被老师喊去做统计分数这种“苦力”。现在电脑普及了，再这么干就太弱了。用python，几行代码就可以搞定。
+
+看一下我们的文档里的数据：
+
+*文件 fast.txt*
+
+```markup
+刘备 23 35 44 47 51
+关羽 60 77 68
+张飞 97 99 89 91
+诸葛亮 100
+```
+
+在 windows 中，如果用记事本打开，并且将这些文字一个个手动输入，默认中文编码为 gbk，因此需要：
+
+```python
+f = open('scores.txt', encoding='gbk')
+```
+
+2.取得文件中的数据。因为每一行都是一条学生成绩的记录，所以用**readlines**，把每一行分开，便于之后的数据处理：
+
+```python
+lines = f.readlines()
+f.close()
+```
+
+提示：在程序中，经常使用print来查看数据的中间状态，可以便于你理解程序的运行。比如这里你可以print (lines)，看一下内容被存成了什么格式。
+
+3.对每一条数据进行处理。按照空格，把姓名、每次的成绩分割开：
+
+```python
+for line in lines:
+   data = line.split() #还记得split方法吗！
+```
+
+4.整个程序最核心的部分到了。如何把一个学生的几次成绩合并，并保存起来呢？我的做法是：对于每一条数据，都新建一个字符串，把学生的名字和算好的总成绩保存进去。最后再把这些字符串一起保存到文件中：
+
+```python
+sum = 0
+score_list = data[1:]  # 学生各门课的成绩列表
+for score in score_list:
+   sum += int(score)
+result = '%s\t: %d\n' % (data[0], sum)  # 名字和总分
+```
+
+  
+
+这里几个要注意的点：
+
+1. 对于每一行分割的数据，**data[0]**是姓名，**data[1:]**是所有成绩组成的列表。
+2. **每次循环中，sum都要先清零**。
+3. score是一个字符串，为了做计算，需要转成整数值int。
+4. result中，我加了一个制表符\t和换行符\n，让输出的结果更好看些。
+
+ 
+
+5.得到一个学生的总成绩后，把它添加到一个list中。
+
+```python
+results.append(result)
+```
+
+ 
+
+results需要在循环之前**初始化** results = []
+
+ 
+
+6.最后，全部成绩处理完毕后，把results中的内容保存至文件。因为results是一个字符串组成的list，这里我们直接用writelines方法：
+
+```python
+output = open('result.txt', 'w', encoding='gbk')
+output.writelines(results)
+output.close()
+```
+
+ 
+
+以下是完整程序，把其中print前面的注释符号去掉，可以查看关键步骤的数据状态。
+
+```python
+f = open('scores.txt', encoding='gbk')
+lines = f.readlines()
+# print(lines)
+f.close()
+
+results = []
+ 
+for line in lines:
+   # print (line)
+   data = line.split()
+   # print (data)
+
+   sum = 0
+   score_list = data[1:]
+   for score in score_list:
+       sum += int(score)
+   result = '%s \t: %d\n' % (data[0], sum)
+   # print (result)
+   
+   results.append(result)
+
+# print (results)
+output = open('result.txt', 'w', encoding='gbk')
+output.writelines(results)
+output.close()
+```
