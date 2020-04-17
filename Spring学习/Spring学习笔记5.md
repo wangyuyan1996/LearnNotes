@@ -249,7 +249,7 @@ public class App
 }
 ```
 
-![image-20200413163441483](.\image\image-20200413163441483.png)
+![image-20200413163441483](./image/image-20200413163441483.png)
 
 ## ApplicationContext容器
 
@@ -289,7 +289,7 @@ public class App
 
 ```
 
-![image-20200413170738502](.\image\image-20200413170738502.png)
+![image-20200413170738502](./image/image-20200413170738502.png)
 
 ## Bean介绍
 
@@ -368,7 +368,7 @@ public class App
 }
 ```
 
-![image-20200416234617833](.\image\image-20200416234617833.png)
+![image-20200416234617833](./image/image-20200416234617833.png)
 
 * **prototype作用域**
 
@@ -405,7 +405,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 </beans>
 ```
 
-![image-20200416234432144](.\image\image-20200416234432144.png)
+![image-20200416234432144](./image/image-20200416234432144.png)
 
 对比两次结果，你发现了什么？
 
@@ -610,7 +610,7 @@ public class App {
 }
 ```
 
-![image-20200417012231724](.\image\image-20200417012231724.png)
+![image-20200417012231724](./image/image-20200417012231724.png)
 
 ### Bean 定义继承
 
