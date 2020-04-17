@@ -1,14 +1,36 @@
-# 2020.4.2 Python 基础
+# 2020.4.14 Python 基础
 
 > 作者邮箱：yangjuehui06@outlook.com
 >
 > 参考书目：《父与子的编程之旅》《笨方法学Python》
+>
+> git: https://github.com/weiyuchens/LearnNotes
+
+## 0.更新日志
+
+我决定搞一个更新日志，每天码字完都记录下，因为我都是在同一个文件里迭代 xixi
+
+/**2020.4.14 更新了函数的前三个小节，补全了前面一点描述，哈哈*/ 
+
+
+
+
+
+
 
 <u>基于Python3.6.8</u> 安装和部署环境不再赘述
 
-IDE：<u>idle</u> 为什么不用Pycharm，因为前面用不上（我也不会）
+IDE：<u>idle</u> 为什么不用Pycharm，因为前面用不上
 
-## 0.前言（大佬勿看。。。）
+//宇哥说要搞个分布式学习哈，正好俺也想系统的学下Python哈哈，所以就加进了  
+
+//疫情下作为一个湖北人嘛，闲着也是闲着，干脆总结一下写成教程就好了^^
+
+//说不定我儿子到时候能拿来启蒙（没有说各位是我儿子的意思）
+
+//未来的儿子/女儿啊，写代码好累啊，以后千万学个艺术啥的啊[挥泪]
+
+## 0.前言（大佬勿看请跳过）
 
 ​	学编程呢，按照我自己的理解哈，其实就是在指挥计算机进行计算，所谓的编程语言的语法、算法实际上都是人为（大佬们）设定的规则，这些规则是帮助一般人（你我）来和计算机进行对话的，计算机只能帮助你计算，帮助你完成复杂的过程，并不能从0直接到1。意思就是说，如果你所做的一切，你都需要先“输入”再经过处理“输出”。
 
@@ -377,7 +399,7 @@ print(perdollar)
 
 这是为啥呢？（恐龙问号）
 
-#### 4.1.2 数据变换
+#### 4.1.2 数据变换（初级版）
 
 因为在Python中，input（）函数，只能记录用户输入的字符串，那么在后面perdollar的运算中，由于字符串不能运算，所以会报错，在这里就要先把他的键入类型由字符串改变为数值，才能继续运算。
 
@@ -877,7 +899,7 @@ for num in range(a,b)
 
 
 
-### 5.7 循环的嵌套
+### 5.7 for的嵌套
 
 设想一样，如果我们要输出5个SOS for 循环可以这么写：
 
@@ -1076,3 +1098,1113 @@ print('you have been used the piece of',count)
 
 ```
 
+
+
+### 6.3 字符串格式化2
+
+之前我们说到，可以用%来构造一个字符串，比如
+
+```python
+print ('%s is easy to learn' % 'Python')
+```
+
+ 
+
+有时候，仅仅代入一个值不能满足我们构造字符串的需要。假设你现在有一组学生成绩的数据，你要输出这些数据。在一行中，既要输出学生的姓名，又要输出他的成绩。例如
+
+xiaoyang's score is 87
+
+xiaoli's score is 59
+
+
+
+那么在 python中，可以写成
+
+```python
+print("%s's score is %d" %('xiaoyang',87))
+#or
+name= 'xiaoli'
+score= 59
+print("%s's score is %d" %(name,score))
+```
+
+ 
+
+无论你有多少个值需要代入字符串中进行格式化，只需要在字符串中的合适位置用对应格式的%表示，然后在后面的括号中按顺序提供代入的值就可以了。占位的%和括号中的值在数量上必须相等，类型也要匹配。
+
+ 
+
+**('xiaoyang', 87)** 这种用()表示的一组数据在python中被称为元组（tuple），是python的一种基本数据结构  **important!!!!**
+
+ 
+
+这里有点需要留心的就是，括号和引号非常多!!!，一定注意括号该加到哪里。外层print的括号，要包含整个输出内容的语句，包括前面的字符串和后面的变量。内存的括号包含代入的值。如果 print 的括号加的不对，加在了 % 前面，那只能输出前半部分，导致报错了。
+
+### 6.4 数据类型的转换（bool）
+
+回顾第4.1章，数据类型的转换，现在要来 讲一下怎么转换BOOl值：
+
+```python
+bool('False')
+```
+
+print 一下结果，会发现是 True。
+
+因为在python中，其他类型转成 bool 类型时，以下数值会被认为是False：
+
+- **为0的数字**，包括0，0.0
+- **空字符串**，包括''，""
+- 表示空值的 **None**
+- **空集合**，包括()，[]，{}
+
+其他的值都认为是True。
+
+ 
+
+**None** 是 python 中的一个特殊值，表示什么都没有，它和 0、空字符、False、空集合 都不一样。关于集合，我们后面的课程再说。
+
+ 
+
+所以，'False' 是一个包含5个字符的字符串，不是空字符，当被转换成bool类型之后，就得到 True。
+
+同样 bool(' ') 的结果是 True，一个空格也不能算作空字符串。
+
+bool('') 才是False。
+
+在 if、while 等条件判断语句里，判断条件会自动进行一次bool的转换。比如
+
+```python
+a = '123'
+if a:
+    print ('this is not a blank string')
+```
+
+ 
+
+这在编程中是很常见的一种写法。效果等同于
+
+```python
+if bool(a) == True:
+```
+
+或者
+
+```python
+if a != '':
+```
+
+
+
+## 7.函数
+
+还记得数学上的函数是什么意思嘛，就是给定一个a，就会有唯一输出的一种对应关系F(a)。在Python以及其他编程语言中，函数也是这个意思，但是有部分有略微不同。
+
+编程中所说的函数，就是一堆语句组成的语句块，这个语句块有个名字，你可以在需要时反复地使用这块语句。它**有可能**需要输入，**有可能**会返回输出。
+
+> 举一个现实中的场景：我们去餐厅吃饭，跟服务员点了菜，过了一会儿，服务员把做好的菜端上来。
+>
+> 1. 餐厅的厨房就可以看作是一个函数
+> 2. 我们点的菜单，就是给这个函数的参数（对函数来说就是输入）
+> 3. 厨师在厨房里做菜的过程就是这个函数的执行过程
+> 4. 做好的菜是返回结果，返回到我们的餐桌上（函数的返回值）
+
+我们之前用的input和range就是python中的函数
+
+打个比方，range()这是一个函数，range(1,10)中的1和10就是你输入的参数，而生成的结果就是这个函数的返回结果。
+
+> 我发现我之前并没有很好的解释range函数，现在插播一下
+>
+> 1.它表示的是左闭右开区间
+>
+> 2.它接收的参数必须是整数，可以是负数，但不能是浮点数等其它类型；
+>
+> 3.它是不可变的序列类型，可以进行判断元素、查找元素、切片等操作，但不能修改元素；
+>
+> 4.它是可迭代对象，却不是迭代器  #这条可以不用理解，难解释
+
+这里相当于range()就是厨房，1和10就是你点的菜，出来的结果就是返回到你桌上的菜
+
+```Python
+for num in range (1,10):
+    print(num)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+>>> 
+```
+
+除了python自带的函数以外，我们还可以自己定义函数，python定义一个函数的关键词是def，即define的缩写。
+
+```python
+def goodbye():
+    print ("please donnot leave me！")
+```
+
+这时候就相当于你定义了一个名字叫goodbye的函数，后面的括号是需要输入的参数，而这里定义的时候并没有填写，是表示不需要参数。下面缩进的代码块就是函数的内容，也叫他函数体。
+
+然后这时候我们去调用它：
+
+```python
+def goodbye():
+    print ("please donnot leave me！")
+
+goodbye()
+
+ 
+please donnot leave me！
+>>> 
+
+```
+
+### 7.1 函数的参数
+
+​	在第7章里，我们讲了怎样定义一个自己的函数，但我们没有给他提供输入**参数**的功能。不能指定参数的函数就好比你去餐厅吃饭，服务员告诉你，不能点菜，有啥吃啥。这显然不能满足很多情况。
+
+ 所以，如果我们希望自己定义的函数里允许调用者提供一些参数，就把这些参数写在括号里，如果有多个参数，用逗号隔开，如：
+
+```python
+def cheat(victim):
+   print(victim + ', please donnot leave me！')
+
+```
+
+或者
+
+```python
+def plus(num1, num2):
+   print(num1+num2)
+```
+
+
+
+```python
+#请注意!,在第一个例子里，victim是一个变量，他并不是字符串，例子如下：
+
+def cheat(victim):
+   print(victim + ', please donnot leave me！')
+
+cheat("xiaoyang")
+
+#也就是说，这里的victim，是要求你输入一个名字！，而不是让你傻傻的输入 victim 初学的时候我踩过的坑TVT
+```
+
+
+
+### 7.2 函数应用细节
+
+我发现我上一段写的不怎么好，所以我准备举个例子讲讲：
+
+还记得我们之前的 那个弱鸡小游戏嘛，hahah，拿来废物利用下
+
+我希望我自己能定义一个函数，然后判断输入数值的大小
+
+```python
+def contrast(num1,num2):
+    if num1<num2:
+        print('num1 is too small!')
+        return False
+    if num1>num2:
+        print('num1 is too big！')
+        return False
+    if num1==num2:
+        print('bingo!')
+        return True
+contrast(8798692659,84092774534)
+
+```
+
+这里说一下，**return** 是函数的结束语句，return 后面的值被作为这个函数的**返回值**。函数中任何地方的 return 被执行到的时候，这个函数就会立刻结束并跳出。
+
+注意：函数的 **返回值** 和我们前面说的 输出 是两回事。print 输出是将结果显示在控制台中，最终一定是转成字符类型；而 返回值，是将结果返回到调用函数的地方，可以是任何类型。
+
+那我们把那个沙雕游戏拿出来溜溜吧：
+
+```python
+def contrast(num1,num2):
+    if num1<num2:
+        print('is too small!')
+        return False
+    if num1>num2:
+        print('is too big！')
+        return False
+    if num1==num2:
+        print('bingo!')
+        return True
+
+from random import randint
+num=randint(1,100)
+print('Guess what i think?')
+bingo=False
+while bingo==False:   #这里就是 ，当bingo的值是False的时候，就会一直循环，反之则输出
+    answer = int(input())
+    bingo = contrast(answer,num)
+```
+
+当然，函数只要定义了。是可以重复使用滴！
+
+
+
+### 7.3 循环的进阶应用
+
+我之前，不太想写，一是因为那天懒病发作，二是因为确实内容太多估计记不住，今天就拿着一起讲哈
+
+可以回顾下，5.1那章节，除了我们讲过的用法，他还可以配合elif和else来使用
+
+if，如果条件满足，就做xxx，否则就不做。
+
+else就是“否则”，就xxx
+
+```flow
+st=>start: 开始框
+cond=>condition: if
+op1=>operation: 处理程序1号
+op2=>operation: 处理程序2号
+io=>inputoutput: 输出
+eden=>end: 结束框
+st->cond
+cond(true)->op1->io
+cond(false)-else->op2->io
+```
+
+当if后面的条件语句不满足时，与之相对应的 else 中的代码块将被执行。
+
+```python
+if a == 1:
+   print('right')
+else:
+   print('wrong')
+```
+
+ elif 意为 else if，含义就是：“否则如果”条件满足，就做yyy。elif 后面需要有一个逻辑判断语句。
+
+```flow
+st=>start: 开始框
+cond=>condition: if
+cond2=>condition: elif
+op1=>operation: 处理程序1号
+op2=>operation: 处理程序2号
+io=>inputoutput: 输出
+ed=>end: 结束框
+st->cond
+cond(true)->op1->io
+cond(false)->cond2(true)->op2->io
+cond2(false)->io
+```
+
+当if条件不满足时，再去判断 elif 的条件，如果满足则执行其中的代码块：
+
+```python
+if a == 1:
+   print ('one')
+elif a == 2:
+   print ('two')
+```
+
+ 
+
+if, elif, else 可组成一个整体的条件语句。
+
+1. if 是**必须有**的；
+2. elif **可以没有，也可以有很多个**，每个elif条件不满足时会进入下一个elif判断；一旦满足，执行完就结束整个条件语句；
+3. else **可以没有，如果有的话只能有一个**，**必须在条件语句的最后。**
+
+```python
+if a ==1:
+   print('one')
+elif a==2:
+   print('two')
+elif a == 3:
+   print ('three')
+else:
+   print ('too many')
+```
+
+我们昨天刚改写的小游戏中的函数contrast，用了三个条件判断，我们可以再改写成一个包含 if...elif...else 的结构：
+
+```python
+def contrast(num1, num2):
+   if num1<num2:			
+       print ('too small')	#如果满足，那么输入too small，并且返回False值
+       return False;
+   elif num1>num2:			#如果if不满足，那么来判断这里
+       print ('too big')	#如果满足，则输出too big，并且返回False
+       return False;
+   else:					#如果上面这两个都不满足，那么输出bingo，返回True值
+       print ('bingo')
+       return True
+
+from random import randint
+num=randint(1,100)
+print('Guess what i think?')
+bingo=False
+while bingo==False:   #这里就是 ，当bingo的值是False的时候，就会一直循环，反之则输出
+    answer = int(input())
+    bingo = contrast(answer,num)
+```
+
+
+
+### 7.4 if的嵌套
+
+回顾5.7 for的嵌套，和for一样，if也是可以嵌套的，即使是在if/else/elif的内部，也可以再次使用if
+
+ 
+
+```python
+if 条件1:			#当条件1为True，并且条件2为True时，执行语句1
+   if 条件2:
+       语句1
+   else:		 #当条件1为true，条件2为False时，执行语句2
+       语句2
+else:			 
+   if 条件2:		#当条件1为False，条件2为true时，执行语句3
+       语句3
+   else:
+       语句4		#当条件1为False。条件2也为False时，执行语句4
+```
+
+else在英语中，是其余/另外的意思
+
+看多重嵌套循环，在python中，是很直观的，在同一纵列的就是同一重逻辑
+
+我们可以用一个例子来理解
+
+我们先向程序输入一个值x，再输入一个值y。(x,y)表示一个点的坐标。程序要告诉我们这个点处在坐标系的哪一个象限。
+
+x>=0，y>=0，则输出1；
+
+x<0，y>=0，则输出2；
+
+x<0，y<0，则输出3；
+
+x>=0，y<0，则输出4。
+
+```python
+print('please input x')
+x=int(input())
+print('please input y')
+y=int(input())
+if x>=0:
+    if y>=0:
+        print("xiangxian1")
+    else:
+        print("xiangxian4")
+else:
+    if y>=0:
+        print("xiangxian2")
+    else:
+        print("xiangxian3")
+
+```
+
+从流程图来看，就是
+
+```flow
+st=>start: start
+cond1=>condition: x>=0
+cond2=>condition: y>=0
+cond3=>condition: y<0
+io1=>inputoutput: 输出1
+io2=>inputoutput: 输出2
+io3=>inputoutput: 输出3
+io4=>inputoutput: 输出4
+
+st->cond1(true)->cond2(true)->io1
+cond1(false)->cond3(true)->io3
+cond2(false)->io4
+cond1(false)->cond3(false)->io2
+```
+
+haha,有没有看明白点
+
+注：这个流程图把我绕晕了，有啥问题的话可以在本文档的开头留言告诉我 歇歇
+
+
+
+## 8.list
+
+wow~ ⊙o⊙，这是一个船新的概念呢
+
+list的中文就是表，
+
+
+今天要说一个新概念：list，中文可以翻译成列表，是用来处理一组有序项目的数据结构。想象一下你的购物清单、待办工作、手机通讯录等等，它们都可以看作是一个列表。说它是新概念也不算确切，因为我们之前已经用过它，就在这个语句里：
+
+```python
+for i in range(1, 10):
+    print(i)
+    #此处略过数行代码
+    
+    
+```
+
+看出来了吗！，这里的print(list(range(1,10)))就是表!
+
+得到的结果是：
+
+```python
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+ 
+
+这样一个中括号中的序列就是 list（列表）。虽然在py3，range的结果并不完全等同于list（这个我们以后再讨论），需要额外转换一下，但你暂时可把它当做list来理解。
+
+把for循环写完整，即：
+
+```python
+l = range(1, 10)
+for i in l:
+    print(i)
+    #此处略过数行代码
+```
+
+这两者实际上是一个效果。
+
+∴for循环所做的事情，实际上就是去遍历一个列表中的每一个元素，并且每次循环都将当前的值赋给 i，直到列表结束
+
+当然，列表也可以由我们自己定义，格式就是[]与，（记得是英文符号，然后我们可以输出这个list
+
+```python
+l = [1, 1, 2, 3, 5, 8, 13]
+pint(1)
+```
+
+当然也可以用for...in来遍历这个list：
+
+```python
+for i in l:
+    print(i)
+```
+
+list中可以有不同的类型，甚至可以共存：
+
+```python
+l = [365, 'everyday', 0.618, True]
+```
+
+注意：我们这里的例子里用的变量名是小写字母 l，不是大写字母 I。你也可以用其他的名字命名变量，但请不要用 list 本身，因为它已经用来表示列表类型，如果再给它赋值，会导致原本的功能被覆盖，很可能带来问题。
+
+我在csdn上找了一个小游戏，可以试试:
+
+> *每一轮，你先输入一个方向射门，然后电脑随机判断一个方向扑救。方向不同则算进球得分，方向相同算扑救成功，不得分。*
+>
+> *之后攻守轮换，你选择一个方向扑救，电脑随机方向射门。*
+>
+> *第5轮结束之后，如果得分不同，比赛结束。*
+>
+> *5轮之内，如果一方即使踢进剩下所有球，也无法达到另一方当前得分，比赛结束。*
+>
+> *5论之后平分，比赛继续进行，直到某一轮分出胜负。*
+
+
+
+
+
+揭晓谜底：
+
+```python
+from random import choice	#这里调用了一个模块，他的作用是从list内部随机挑选一个元素
+print('choose one side to shoot')
+print('left,centre,right')
+side = input()
+print('YOU KICKED  '+   side)
+direction=['left','centre','right']
+protect=choice(direction)
+print('the shoumenyuan choice  '+   protect)
+if side != protect:
+    print('god!,goal！')
+
+else:
+    print('sad :-(')
+
+```
+
+
+
+### 8.1 list的操作
+
+上一小节，讲到了元素，那么，除了使用for...in 来遍历他，还有啥别的用处？
+
+我们先定义一个list
+
+```python
+l=["orderabowlof","malaxiangguo",778,True]
+```
+
+
+
+**1）访问list内的元素**
+
+list中的每个元素都对应一个递增的序号。与现实中习惯的序号不同在于，计算机中的计数通常都是**从0开始**，python也不例外。（如果你记不清这个而导致了错误，请去听一下孙燕姿的《爱从零开始》:）
+
+ 
+
+要访问l中的第 1 个元素365，只要用 l[0] 就可以了。依次类推，
+
+```python
+print (l[1])
+```
+
+就会输出 'malaxiangguo'
+
+当然，你不能访问一个不存在的元素，比如说 l[9]，这样程序会报错。
+
+**2）修改list中的元素**
+
+修改list中的某一个元素，只需要直接给那个元素赋值就可以了：
+
+```python
+l[0] = "odertwobowlsof"
+```
+
+ 
+
+输出l，得到 **["ordertwobowlsof", 'malaxiangguo', 778, True]**，第1个元素已经从一碗变成了两碗，嘿嘿。
+
+**3）在list中添加元素**
+
+list有一个**append**方法，可以增加元素。以l这个列表为例，调用的方法是：
+
+```python
+l.append('is free')
+>>>
+['orderabowlof', 'malaxiangguo', 778, True, 'is free']
+>>> 
+#输出之后，他就会加在list的最后面
+```
+
+**4）删除list中的元素**
+
+删除list中的某个元素直接使用del
+
+```python
+del l[3]
+>>>
+['orderabowlof', 'malaxiangguo', 778]
+>>> 
+```
+
+
+
+### 8.2 list切片 （重头戏）
+
+list有两类最常用的操作，**索引（index）**和**切片（slice）**
+
+我们说的用[]加序号访问的方法就是索引操作。
+
+ 
+
+除了指定位置进行索引外，list还可以处理负数的索引。继续用昨天的例子：
+
+```python
+l = ["orderabowlof","malaxiangguo",778,True]
+```
+
+ 
+
+**l[-1]表示l中的最后一个元素。**
+
+**l[-3]表示倒数第3个元素。**
+
+切片操作，是在[]内提供一对可选数字，用:来分割。冒号前的数表示切片的开始位置，冒号后的数字表示切片到哪里结束。同样，计数从0开始。
+
+注意：开始位置包含在切片中，而结束位置不包括。
+
+ 
+
+```python
+l[1:3]
+```
+
+得到的结果是["malaxiangguo", 778]。
+
+这个沙雕玩意是不是很难理解。。
+
+我想个办法转述一哈
+
+比如说现在有一个list
+
+```python
+l=[1,2,3,4,5,6,7,8,9]
+```
+
+OK, 那我们现在要取前三个元素咋办
+
+笨办法：
+
+```python
+>>> [l[0],l[1],l[2]]
+[1,2,3]
+>>> 
+```
+
+但是如果要按照切片来做怎么办，大家可以再重新的去看上面的那个概念：
+
+> 切片操作，是在[]内提供一对可选数字，用:来分割。冒号前的数表示切片的开始位置，冒号后的数字表示切片到哪里结束。同样，计数从0开始。
+>
+> 注意：开始位置包含在切片中，而结束位置不包括。
+
+```python
+>>> l[0:3]
+[1, 2, 3]
+>>> 
+```
+
+为啥是[0:3]?
+
+首先，第一，0是list的第一个元素，3是第四个元素，其次结束的位置不包括
+
+所以是[0:3]  **这个非常重要，我之前一直混淆，一定要记清楚**，建议自己写个表练习练习
+
+如果不指定第一个数，切片就从列表第一个元素开始。
+
+如果不指定第二个数，就一直到最后一个元素结束。
+
+都不指定，则返回整个列表。
+
+```python
+l[:3]
+l[1:]
+l[:]
+```
+
+注意：不管是返回一部分，还是整个列表，都是一个新的对象，与不影响原来的列表。
+
+ 
+
+同索引一样，切片中的数字也可以使用负数。比如：
+
+```python
+>>> l[1:-1]
+[2, 3, 4, 5, 6, 7, 8]
+>>> 
+```
+
+++++++
+
+沙雕小游戏环节：
+
+还是那个罚球小游戏，然他循环5次，然后记录下得分，先不判断胜负
+
+```python
+from random import choice
+
+score_you = 0
+score_com = 0
+direction = ['left', 'center', 'right']
+
+for i in range(5):
+   print ('==== Round %d - You Kick! ====' % (i+1))
+   print ('Choose one side to shoot:')
+   print ('left, center, right')
+   you = input()
+   print ('You kicked ' + you)
+   com = choice(direction)
+   print ('Computer saved ' + com)
+   if you != com:
+       print ('Goal!')
+       score_you += 1
+   else:
+       print ('Oops...')
+   print ('Score: %d(you) - %d(com)\n' % (score_you, score_com))
+
+   print ('==== Round %d - You Save! ====' % (i+1))
+   print ('Choose one side to save:')
+   print ('left, center, right')
+   you = input()
+   print ('You saved ' + you)
+   com = choice(direction)
+   print ('Computer kicked ' + com)
+   if you == com:
+       print ('Saved!')
+   else:
+       print ('Oops...')
+       score_com += 1
+   print ('Score: %d(you) - %d(com)\n' % (score_you, score_com))
+
+```
+
+
+
+### 8.3 字符串的分割
+
+字符串和列表有很多不得不说的故事，比如python很多人的第一个项目，就是抓取网站的某个链接，那么就涉及到对网站的代码处理。再处理代码的过程中，字符串与list之间的操作是不可避免的。
+
+
+
+比如说，你现在看到了一个英语句子，你想抓取中间的所有单词。
+
+```python
+sentence='I love Xiaoyang everyday'
+#这时候就要对字符串进行分割了
+>>> sentence.split()
+
+['I', 'love', 'Xiaoyang', 'everyday']
+>>> 
+```
+
+split()能将字符串按照空格分隔开，并且组成一个由各个单词字符串组成的list
+
+除了空格外，split()同时也会按照换行符**\n**，制表符**\t**进行分割。所以应该说，split默认是按照**空白字符**进行分割。
+
+ 
+
+之所以说默认，是因为split还可以指定分割的符号。比如你有一个很长的字符串
+
+ 
+
+```python
+section = 'Hi. I am the one. Bye.'
+```
+
+ 
+
+通过指定分割符号为'.'，可以把每句话分开
+
+ 
+
+```python
+section.split('.')
+```
+
+ 
+
+得到
+
+ 
+
+```python
+['Hi', ' I am the one', ' Bye', '']
+```
+
+ 
+
+这时候，'.'作为分割符被去掉了，**而空格仍然保留在它的位置上**。
+
+注意最后那个空字符串。每个'.'都会被作为分割符，即使它的后面没有其他字符，也会有一个空串被分割出来。例如
+
+ 
+
+```python
+'aaa'.split('a')
+```
+
+ 
+
+将会得到['', '', '', '']，由四个空串组成的list。
+
+
+
+### 8.4 连接list
+
+emmm.既然有分割，当然也有连接。
+
+这里就要用到join
+
+join的格式还挺怪的，他并不是list所包含的方法，而是字符串的方法。
+
+所以你需要拥有一个字符串作为list中所有元素的连接符，然后再调用连接符join
+
+
+
+```python
+s=' '
+l=['apple','juice','good']
+fruit= s.join(l)
+print(fruit)
+>>>
+apple juice good
+>>> 
+```
+
+或者也可以在shell中输入：
+
+```python
+>>> ' '.join(['apple','juice','good'])
+'apple juice good'
+>>> 
+```
+
+结果是一样的
+
+当然，如果你冒号中，没有空格，那么字符串就是无缝连接
+
+### 8.5 字符串的索引和切片
+
+**1.遍历**
+
+前面讲过，list是可以由for...in来遍历的，实际上字符串也可以这样被遍历
+
+```python
+word= 'hellowworld'
+for c in word:
+    print(c)
+>>>
+h
+e
+l
+l
+o
+w
+w
+o
+r
+l
+d
+>>> 
+```
+
+**2.索引**
+
+可以通过[]来索引访问字符串中的某个字符
+
+```python
+print(word[1])
+print(word[-1])
+#你们不会忘了是从0开始的吧，不会吧不会吧
+```
+
+和list不同，字符串不能通过访问去修改期中的字符！
+
+
+
+**3.切片**
+
+可以通过两个序号，来截取其中的某段，具体规则和list相同
+
+```python
+print (word[5:7])
+print (word[:-5])
+print (word[:])
+```
+
+**4. 连接字符**
+
+join方法也可以对字符串使用，作用就是用连接符把字符串中的每个字符重新连接成一个新字符串。
+
+```python
+newword = ','.join(word)
+```
+
+## 9.文件读取与处理
+
+### 9.1 文件的读取
+
+之前，我们写的程序绝大多数都依赖于从命令行输入。假如某个程序需要输入很多数据，比如一次考试的全班学生成绩，再这么输就略显痛苦了。一个常见的办法就是把学生的成绩都保存在一个文件中，然后让程序自己从这个文件里取数据。
+
+ 
+
+要读取文件，先得有文件。我们新建个文件，就叫它data.txt。在里面随便写上一些话，保存。把这个文件放在接下来你打算保存代码的文件夹下，这么做是为了方便我们的程序找到它。准备工作就绪，可以来写我们的代码了。
+
+打开一个文件的命令很简单：
+
+```python
+open('文件名')
+```
+
+这里的文件名可以用文件的完整路径，也可以是相对路径。因为我们把要读取的文件和代码放在了同一个文件夹下，所以只需要写它的文件名就够了。
+
+```python
+f = open('data.txt')
+```
+
+ 
+
+但这一步只是打开了一个文件，并没有得到其中的内容。变量f保存了这个文件，还需要去读取它的内容。你可以通过**read()**函数把文件内所有内容读进一个字符串中。
+
+```python
+data = f.read()
+```
+
+ 
+
+做完对文件的操作之后，记得用**close()**关闭文件，释放资源。虽然现在这样一个很短的程序，不做这一步也不会影响运行结果。但养成好习惯，可以避免以后发生莫名的错误。
+
+注意：close() 一定要有后面的括号，不然就没有调用这个函数。
+
+ 
+
+完整程序示例：
+
+```python
+f = open('data.txt')
+data = f.read()
+print (data)
+f.close()
+```
+
+**这里特么的会报错啊！！！！！！**
+
+```python
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xae in position 10: illegal multibyte sequence
+>>> #错误代码
+```
+
+这个问题主要是由于你的文件就是那个txt是gbk编码！
+
+解决方法：
+
+```python
+#在代码的开头，放上
+import _locale
+_locale._getdefaultlocale = (lambda *args: ['zh_CN', 'utf8'])
+```
+
+> https://blog.csdn.net/blmoistawinde/article/details/87717065
+
+
+
+### 9.2 文件写入
+
+和把大象关进冰箱一样，写文件也需要三步：
+
+1. 打开文件；
+2. 把内容写入文件；
+3. 关闭文件。
+
+ python默认是以**只读模式**打开文件。如果想要写入内容，在打开文件的时候需要指定打开模式为写入：
+
+```python
+f = open('output.txt', 'w')
+```
+
+'w'就是writing，以这种模式打开文件，原来文件中的内容会被你新写入的内容覆盖掉，**如果文件不存在，会自动创建文件**。
+
+之前不加参数时，open的模式默认为'r'，reading，只读模式，文件必须存在，否则引发异常。
+
+另外还有一种常用模式是'a'，appending。它也是一种写入模式，但你写入的内容不会覆盖之前的内容，而是添加到原有文件内容后面。
+
+ ```python
+words= 'i will kill you !' 
+
+put = open('fast.txt','w')
+
+put.write(words)
+
+put.close()
+
+ ```
+
+
+
+### 9.3 处理文件中的数据
+
+
+我们已经知道了如何读取和写入文件。有了这两个操作文件的方法，再加上对文件内容的处理，就能写一些小程序，解决不少日常的数据处理工作。 
+
+比如我现在拿到一份文档，里面有某个班级里所有学生的平时作业成绩。因为每个人交作业的次数不一样，所以成绩的数目也不同，没交作业的时候就没有分。我现在需要统计每个学生的平时作业总得分。
+
+ 记得我小的时候，经常有同学被老师喊去做统计分数这种“苦力”。现在电脑普及了，再这么干就太弱了。用python，几行代码就可以搞定。
+
+看一下我们的文档里的数据：
+
+*文件 fast.txt*
+
+```markup
+刘备 23 35 44 47 51
+关羽 60 77 68
+张飞 97 99 89 91
+诸葛亮 100
+```
+
+在 windows 中，如果用记事本打开，并且将这些文字一个个手动输入，默认中文编码为 gbk，因此需要：
+
+```python
+f = open('scores.txt', encoding='gbk')
+```
+
+2.取得文件中的数据。因为每一行都是一条学生成绩的记录，所以用**readlines**，把每一行分开，便于之后的数据处理：
+
+```python
+lines = f.readlines()
+f.close()
+```
+
+提示：在程序中，经常使用print来查看数据的中间状态，可以便于你理解程序的运行。比如这里你可以print (lines)，看一下内容被存成了什么格式。
+
+3.对每一条数据进行处理。按照空格，把姓名、每次的成绩分割开：
+
+```python
+for line in lines:
+   data = line.split() #还记得split方法吗！
+```
+
+4.整个程序最核心的部分到了。如何把一个学生的几次成绩合并，并保存起来呢？我的做法是：对于每一条数据，都新建一个字符串，把学生的名字和算好的总成绩保存进去。最后再把这些字符串一起保存到文件中：
+
+```python
+sum = 0
+score_list = data[1:]  # 学生各门课的成绩列表
+for score in score_list:
+   sum += int(score)
+result = '%s\t: %d\n' % (data[0], sum)  # 名字和总分
+```
+
+  
+
+这里几个要注意的点：
+
+1. 对于每一行分割的数据，**data[0]**是姓名，**data[1:]**是所有成绩组成的列表。
+2. **每次循环中，sum都要先清零**。
+3. score是一个字符串，为了做计算，需要转成整数值int。
+4. result中，我加了一个制表符\t和换行符\n，让输出的结果更好看些。
+
+ 
+
+5.得到一个学生的总成绩后，把它添加到一个list中。
+
+```python
+results.append(result)
+```
+
+ 
+
+results需要在循环之前**初始化** results = []
+
+ 
+
+6.最后，全部成绩处理完毕后，把results中的内容保存至文件。因为results是一个字符串组成的list，这里我们直接用writelines方法：
+
+```python
+output = open('result.txt', 'w', encoding='gbk')
+output.writelines(results)
+output.close()
+```
+
+ 
+
+以下是完整程序，把其中print前面的注释符号去掉，可以查看关键步骤的数据状态。
+
+```python
+f = open('scores.txt', encoding='gbk')
+lines = f.readlines()
+# print(lines)
+f.close()
+
+results = []
+ 
+for line in lines:
+   # print (line)
+   data = line.split()
+   # print (data)
+
+   sum = 0
+   score_list = data[1:]
+   for score in score_list:
+       sum += int(score)
+   result = '%s \t: %d\n' % (data[0], sum)
+   # print (result)
+   
+   results.append(result)
+
+# print (results)
+output = open('result.txt', 'w', encoding='gbk')
+output.writelines(results)
+output.close()
+```
