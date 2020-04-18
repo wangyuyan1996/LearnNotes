@@ -2105,7 +2105,7 @@ put.close()
 
 看一下我们的文档里的数据：
 
-*文件 fast.txt*
+*文件 scores.txt*
 
 ```markup
 刘备 23 35 44 47 51
