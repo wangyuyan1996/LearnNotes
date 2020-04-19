@@ -1,4 +1,4 @@
-# 2020.4.14 Python 基础
+# 2020.4.19 Python 基础
 
 > 作者邮箱：yangjuehui06@outlook.com
 >
@@ -10,9 +10,9 @@
 
 我决定搞一个更新日志，每天码字完都记录下，因为我都是在同一个文件里迭代 xixi
 
-/**2020.4.14 更新了函数的前三个小节，补全了前面一点描述，哈哈*/ 
+*2020.4.14 更新了函数的前三个小节，补全了前面一点描述，哈哈*
 
-
+*2020.4.19 补充了5.8 break章节*；补充5.9 continue章节；新增10、11章 字典与模块
 
 
 
@@ -991,6 +991,56 @@ for num in range(0, 5):
 
 
 
+
+
+### 5.8 break（补充）
+
+我们之前不是一起学了循环嘛，我忘记有这个了，哈哈
+
+所谓的break，就是在循环仍然满足循环条件或者序列没有遍历完的时候强制跳出循环，就要用到break语句
+
+```python
+while True:  		 #当为True的时候执行循环
+    a = input()		
+    if a == 'Eof':	#当a=‘Eof’的时候结束循环
+        break
+```
+
+```python
+for i in range(10):   #输入次数为10
+    a = input()
+    if a == 'Eof':		#有一次输入为Eof，提前结束
+        break
+```
+
+之前我们是不是有个猜数小游戏，哈哈，可以加上一个，如果输入的数据类型不对。程序直接结束。
+
+
+
+### 5.9 continue（补充）
+
+想了想这个应该也要加上，
+
+break是彻底的跳出循环，而continue是略过这次循环的剩下内容，直接进入下次循环。
+
+比如说 在成绩记录的时候，如果一个人的某项成绩小于六十分，那就不计入总成绩
+
+这个语句可以用if来实现，当然也可以用break：
+
+```python
+for score in data[1:]:   #这里的这个不用管，理解下面的就行
+    point = int (score)
+    if point < 60:
+        continue
+    sum += point
+```
+
+当然，无论是continue还是break，改变的都是当前所处的内层循环的运行，不会干扰到外层的运行
+
+
+
+
+
 ## 6.字符串
 
 ### 6.1 字符串基础
@@ -1444,7 +1494,7 @@ num=randint(1,100)
 print('Guess what i think?')
 bingo=False
 while bingo==False:   #这里就是 ，当bingo的值是False的时候，就会一直循环，反之则输出
-    answer = int(input())
+    answer = int(input()）
     bingo = contrast(answer,num)
 ```
 
@@ -2208,3 +2258,188 @@ output = open('result.txt', 'w', encoding='gbk')
 output.writelines(results)
 output.close()
 ```
+
+
+
+## 10.字典
+
+重头戏哈哈啊哈
+
+字典这种数据结构，有点类似我们常说的通讯录
+
+一个名字对应一组信息，名字叫做‘键’，对应的信息内容叫’值‘，字典就是键对应值的集合
+
+他的基本格式是：
+
+```python
+d = {key1: value1,key2 : value2}
+```
+
+其中 ，key就是键，value就是值
+
+两者之间用冒号进行分割，每对之间用逗号分割
+
+
+
+关于字典的键要注意的是：
+
+1.键必须是唯一的；
+
+2.键只能是简单对象，比如字符串、整数、浮点数、bool值。
+
+ 
+
+list就不能作为键，但是可以作为值。
+
+举个简单的字典例子：
+
+```python
+score = {
+   '萧峰': 95,
+   '段誉': 97,
+   '虚竹': 89
+}
+```
+
+python字典中的键/值对没有顺序，我们无法用索引访问字典中的某一项，而是要用键来访问。
+
+ 
+
+```python
+print (score['段誉'])
+```
+
+ 
+
+注意，如果你的键是字符串，通过键访问的时候就需要加引号，如果是数字作为键则不用。
+
+如果你提供的键在字典中不存在，则会报错。另一种访问字典中元素的方法是：
+
+```python
+score.get('慕容复')
+```
+
+ 
+
+这种方法的好处是，即使提供的键不存在，也不会报错，只会返回 None
+
+ 字典也可以通过for...in遍历：
+
+```python
+for name in score:
+   print (score[name])
+```
+
+  
+
+注意，遍历的变量中存储的是字典的键。
+
+ 
+
+如果要改变某一项的值，就直接给这一项赋值：
+
+```python
+score['虚竹'] = 91
+```
+
+ 
+
+增加一项字典项的方法是，给一个新键赋值：
+
+```python
+score['慕容复'] = 88
+```
+
+ 
+
+删除一项字典项的方法是del：
+
+```python
+del score['萧峰']
+```
+
+注意，这个键必须已存在于字典中。
+
+ 
+
+如果你想新建一个空的字典，只需要:
+
+```python
+score = {}
+>>> score['xiaoyang']=11
+>>> score['xiaoli']=22
+>>> score['xiaoliu']=33
+>>> print(score['xiaoliu'])
+33
+>>> 
+```
+
+ 
+
+## 11.模块
+
+python自带了功能丰富的标准库，另外还有数量庞大的各种第三方库。使用这些“巨人的”代码，可以让开发事半功倍，就像用积木一样拼出你要的程序。
+
+ 
+
+使用这些功能的基本方法就是使用模块。通过函数，可以在程序里重用代码；通过模块，则可以重用别的程序中的代码。
+
+ 
+
+模块可以理解为是一个包含了函数和变量的py文件。在你的程序中引入了某个模块，就可以使用其中的函数和变量。
+
+
+
+我们之前用过的一个模块，random，还记得吗？
+
+来看一个我们之前使用过的模块：
+
+ 
+
+```python
+import random 
+```
+
+ 
+
+import不就是进口的意思嘛，英语学好了学python是真的轻松呢，import语句告诉python，我们要用random模块中的内容。然后便可以使用random中的方法，比如：
+
+ 
+
+```python
+random.randint(1, 10)
+random.choice([1, 3, 5])
+```
+
+ 
+
+注意，函数前面需要加上“random.”，这样python才知道你是要调用random中的方法。
+
+想知道random有哪些函数和变量，可以用dir()方法：
+
+ 
+
+```python
+dir(random)
+```
+
+ 
+
+如果你只是用到random中的某一个函数或变量，也可以通过from...import...指明：
+
+```python
+from math import pi
+print (pi)
+```
+
+ 
+
+为了便于理解和避免冲突，你还可以给引入的方法换个名字：
+
+```python
+from math import pi as math_pi
+print (math_pi)
+```
+
+
+
