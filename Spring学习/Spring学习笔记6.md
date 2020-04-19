@@ -152,5 +152,142 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 </beans>
 ```
 
+## 注入集合
 
+| 元素      | 描述                                                        |
+| --------- | ----------------------------------------------------------- |
+| `<list>`  | 它有助于连线，如注入一列值，允许重复。                      |
+| `<set>`   | 它有助于连线一组值，但不能重复。                            |
+| `<map>`   | 它可以用来注入名称-值对的集合，其中名称和值可以是任何类型。 |
+| `<props>` | 它可以用来注入名称-值对的集合，其中名称和值都是字符串类型。 |
+
+> JavaCollection.java
+
+```java
+package com.sgg.ditest;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+public class JavaCollection {
+   List addressList;
+   Set  addressSet;
+   Map  addressMap;
+   Properties addressProp;
+   
+   // a setter method to set List
+   public void setAddressList(List addressList) {
+      this.addressList = addressList;
+   }
+   // prints and returns all the elements of the list.
+   public List getAddressList() {
+      System.out.println("List Elements :"  + addressList);
+      return addressList;
+   }
+   // a setter method to set Set
+   public void setAddressSet(Set addressSet) {
+      this.addressSet = addressSet;
+   }
+   // prints and returns all the elements of the Set.
+   public Set getAddressSet() {
+      System.out.println("Set Elements :"  + addressSet);
+      return addressSet;
+   }
+   // a setter method to set Map
+   public void setAddressMap(Map addressMap) {
+      this.addressMap = addressMap;
+   }  
+   // prints and returns all the elements of the Map.
+   public Map getAddressMap() {
+      System.out.println("Map Elements :"  + addressMap);
+      return addressMap;
+   }
+   // a setter method to set Property
+   public void setAddressProp(Properties addressProp) {
+      this.addressProp = addressProp;
+   } 
+   // prints and returns all the elements of the Property.
+   public Properties getAddressProp() {
+      System.out.println("Property Elements :"  + addressProp);
+      return addressProp;
+   }
+}
+```
+
+> application.xml中加入bean
+
+```xml
+	<bean id="javaCollection" class="com.sgg.ditest.JavaCollection">
+
+      <!-- results in a setAddressList(java.util.List) call -->
+      <property name="addressList">
+         <list>
+            <value>INDIA</value>
+            <value>Pakistan</value>
+            <value>USA</value>
+            <value>USA</value>
+         </list>
+      </property>
+
+      <!-- results in a setAddressSet(java.util.Set) call -->
+      <property name="addressSet">
+         <set>
+            <value>INDIA</value>
+            <value>Pakistan</value>
+            <value>USA</value>
+            <value>USA</value>
+        </set>
+      </property>
+
+      <!-- results in a setAddressMap(java.util.Map) call -->
+      <property name="addressMap">
+         <map>
+            <entry key="1" value="INDIA"/>
+            <entry key="2" value="Pakistan"/>
+            <entry key="3" value="USA"/>
+            <entry key="4" value="USA"/>
+         </map>
+      </property>
+
+      <!-- results in a setAddressProp(java.util.Properties) call -->
+      <property name="addressProp">
+         <props>
+            <prop key="one">INDIA</prop>
+            <prop key="two">Pakistan</prop>
+            <prop key="three">USA</prop>
+            <prop key="four">USA</prop>
+         </props>
+      </property>
+
+   </bean>
+```
+
+> App.java
+
+```java
+package com.sgg.ditest;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+        JavaCollection jc=(JavaCollection)context.getBean("javaCollection");
+        jc.getAddressList();
+        jc.getAddressSet();
+        jc.getAddressMap();
+        jc.getAddressProp();
+    }
+}
+
+```
 
