@@ -1,0 +1,54 @@
+# SpringMVC学习笔记6：@Autowired和@Service依赖注入
+
+>在前面学习的控制器中并没有体现 MVC 的 M 层，这是因为控制器既充当 C 层又充当 M 层。这样设计程序的系统结构很不合理，应该将 M 层从控制器中分离出来。
+>
+>Spring MVC 框架本身就是一个非常优秀的 MVC 框架，它具有依赖注入的优点，可以通过 org.springframework.beans.factory. annotation.Autowired 注解类型将依赖注入到一个属性（成员变量）或方法，例如：
+>
+>```java
+>@Autowired
+>public UserService userService;
+>```
+
+>在 [Spring](http://c.biancheng.net/spring/) MVC 中，为了能被作为依赖注入，类必须使用 org.springframework.stereotype.Service 注解类型注明为 @Service（一个服务）。另外，还需要在配置文件中使用 <context：component-scan base-package=“基本包”/> 元素来扫描依赖基本包。
+
+下面把上一节程序中“登录”和“注册”的业务逻辑处理分离出来，使用 Service 层实现。
+
+首先创建 service 包，在该包中创建 UserService 接口和 UserServiceImpl 实现类。
+
+UserService 接口的具体代码如下：
+
+```java
+package service;
+import pojo.UserForm;
+public interface UserService {
+    boolean login(UserForm user);
+    boolean register(UserForm user);
+}
+```
+
+UserServiceImpl 实现类的具体代码如下：
+
+```java
+package service;
+import org.springframework.stereotype.Service;
+import pojo.UserForm;
+//注解为一个服务
+@Service
+public class UserServiceImpl implements UserService {
+    public boolean login(UserForm user) {
+        if ("zhangsan".equals(user.getUname())
+                && "123456".equals(user.getUpass())) {
+            return true;
+        }
+        return false;
+    }
+    public boolean register(UserForm user) {
+        if ("zhangsan".equals(user.getUname())
+                && "123456".equals(user.getUpass())) {
+            return true;
+        }
+        return false;
+    }
+}
+```
+
