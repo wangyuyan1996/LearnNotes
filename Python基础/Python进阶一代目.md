@@ -324,8 +324,7 @@ def func(a=5,b)		#False
 
 域和方法被合称为类的属性。
 
-
-python是一种高度面向对象的语言，它其中的所有东西其实都是对象。所以我们之前也一直在使用着对象。看如下的例子：
+**python是一种高度面向对象的语言**，它其中的所有东西其实都是对象。所以我们之前也一直在使用着对象。看如下的例子：
 
 ```python
 s = 'how are you'
@@ -344,3 +343,362 @@ dir(s)
 dir(list)
 ```
 
+
+
+## 6.面向对象（2）
+
+我知道上一章听起来很痛苦，我一开始也非常痛苦，等我先写完后面的具体例子，然后会把上面几章节细化一下的。
+
+
+
+先来试试创建一个类：
+
+```python
+class MyClass:	#记得冒号
+    pass
+
+mc = MyClass()
+print(mc)
+```
+
+关键词是class，然后加上类的名称，创建了一下叫MyClass的类。
+
+后面缩进的pass是这个类的内部内容，pass表示的是这个内部是空的。
+
+类名加上圆括号的形式可以创建一个关于这个类的实例，也就是所谓的被称之为‘对象’的东西。
+
+我们可以把这个对象赋值给变量mc。
+
+所以，现在变量mc就是一个名叫MyClass的类的对象。
+
+来看看输出结果：
+
+```python
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test.py 
+<__main__.MyClass object at 0x03C842D0>
+>>> 
+```
+
+这里就可以解释一下了
+
+mc是__ main __这个模块中MyClass这个类的一个实例
+
+也就是这个英文的字面意思(object)，后面的这个16进制代码是说这个对象在内存中的内存地址。
+
+
+
+现在我们给这个类加上一点“域”
+
+```python
+class MyClass:	#记得冒号
+    name = 'ash'
+
+    def sayhellow(self):
+        print ('hellow %s' % self.name)
+        
+mc = MyClass()
+print(mc.name)
+mc.name = 'lily'
+mc.sayhellow()
+
+```
+
+
+
+运行一下，看看结果：
+
+```python
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test.py 
+ash
+hellow lily
+>>> 
+```
+
+
+
+在这里，我给MyClass这个类增加了一个变量name，并且把它的值设定为了’ash‘
+
+然后定义了一个新方法 sayhellow
+
+下面这个mc.name是调用类变量的方法，
+
+也就是说，调用一个类的方法就是“对象.变量名”。
+
+这样你就可以获得他的值，当然也就可以改变它的值
+
+
+
+但是要注意到，类方法和之前说到的定义函数是有区别的，他们的区别在于，类方法的第一个参数必须为self，并且通过 对象.方法名（）的方式进行调用。
+
+**但是并不需要额外提供self这个参数的值！！！**
+
+self在这个类方法中的值，就是你调用的这个对象本身额
+
+
+
+## 7.面向对象（3）-具象理解
+
+是不是还是看不懂，没关系，你一次性肯定是看不懂的，我也看不懂，这很正常。
+
+面向对象本身就是复杂抽象的概念，我们可以先不管对象和类的抽象概念，试着从代码中去理解
+
+
+
+在刚开始编程的时候，从上到下一行行执行的简单程序容易被理解，即使加上if、while、for之类的语句以及函数调用，也还是不算困难。有了面向对象之后，程序的执行路径就变得复杂，很容易让人混乱。不过当你熟悉之后会发现，面向对象是比面向过程更合理的程序设计方式。
+
+
+
+这里举个例子
+
+
+
+我现在有一辆小汽车
+
+已知武汉到宜昌有100km（误）
+
+想要算出开着汽车60kmh的速度（大误），从武汉到宜昌要多久。
+
+面向过程的方法：
+
+```python
+speed = 60.0
+distance = 100.0
+time = distance/ speed
+print (time)
+```
+
+
+
+面向对象的方法：
+
+```python
+class Car:
+    speed = 0
+    def drive(self,distance):
+        time = distance /self.speed
+        print(time)
+        
+car = Car()
+car.speed = 60.0
+car.drive(100.0)
+
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test.py 
+1.6666666666666667
+>>> 
+```
+
+
+
+当然，看上去，似乎面向过程的工作量似乎更小？
+
+实际上，如果我们让题目变得更加复杂
+
+如我我有一辆兰博基尼（大雾），他的速度是150kmh
+
+然后到了武汉，我还想去长沙。
+
+那么我想知道，这两种车在这两段路上需要多长时间
+
+面向过程：
+
+```python
+speed1 = 60.0
+distance1 = 100.0
+time1 = distance1 / speed1
+print (time1)
+
+distance2 = 200.0
+time2 = distance2 / speed1
+print (time2)
+
+speed2 = 150.0
+time3 = distance1 / speed2
+print (time3)
+
+time4 = distance2 / speed2
+print (time4)
+
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test.py 
+1.6666666666666667
+3.3333333333333335
+0.6666666666666666
+1.3333333333333333
+>>> 
+```
+
+
+
+面向对象：
+
+```python
+class Car:
+    speed = 0
+    def drive(self,distance):
+        time = distance/self.speed
+        print(time)
+
+car1 = Car()
+car1.speed = 60.0
+car1.drive(100.0)
+car1.drive(200.0)
+
+car2 = Car()
+car2.speed = 150.0
+car2.drive(100.0)
+car2.drive(200.0)
+
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test.py 
+1.6666666666666667
+3.3333333333333335
+0.6666666666666666
+1.3333333333333333
+>>> 
+```
+
+
+
+对比两种方法，面向过程把数据和处理数据的计算全部放在一起，当功能复杂之后，就会显得很混乱，且容易产生很多重复的代码。而面向对象，把一类数据和处理这类数据的方法封装在一个类中，让程序的结构更清晰，不同的功能之间相互独立。这样更有利于进行模块化的开发方式。
+
+ 
+
+当然，面向对象实在是太复杂了
+
+这个例子相当的粗浅，他和之前的循环，变量不一样，没有那么直观，但是记住不要对他产生恐惧！加油！
+
+
+
+
+
+## 8.面向对象（4）-继承
+
+好像，上面那个并不能很好的展现面向对象的魅力啊（误）
+
+
+
+加点难度吧
+
+仍然是宜昌到武汉，但是这次除了奔驰兰博，我又给自己new了一辆自行车！（厉害吧）
+
+自行车和汽车有着相同的属性：速度（speed）。还有一个相同的方法（drive），来输出行驶/骑行一段距离所花的时间。但这次我们要给汽车增加一个属性：每公里油耗（fuel）。而在汽车行驶一段距离的方法中，除了要输出所花的时间外，还要输出所需的油量。
+
+
+
+这个用面向过程的思路，可能很要掉电头发hehae。
+
+你可能需要写两个函数，然后把数据作为参数传递进去，在调用的时候要搞清应该使用哪个函数和哪些数据。
+
+面向过程的方法，你可能需要写两个函数，然后把数据作为参数传递进去，在调用的时候要搞清应该使用哪个函数和哪些数据。有了面向对象，你可以把相关的数据和方法封装在一起，并且可以把不同类中的相同功能整合起来。这就需要用到面向对象中的另一个重要概念：**继承。**
+
+ 
+
+我们要使用的方法是，创建一个叫做Vehicle的类，表示某种车，它包含了汽车和自行车所共有的东西：速度，行驶的方法。然后让Car类和Bike类都继承这个Vehicle类，即作为它的子类。在每个子类中，可以分别添加各自独有的属性。
+
+**Vehicle类被称为基本类或超类，Car类和Bike类被成为导出类或子类。**
+
+
+
+```python
+class Vehicle:
+    def __init__(self,speed):		
+        self.speed=speed
+
+    def drive(self,distance):
+        print('need %f hour(s)' %(distance / self.speed))
+
+class Bike(Vehicle):
+    pass
+
+class Car(Vehicle):
+    def __init__(self,speed,fuel):
+        Vehicle.__init__(self,speed)
+        self.fuel = fuel
+
+
+    def drive(self,distance):
+        Vehicle.drive(self,distance)
+        print('need %f fuels' %(distance / self.speed))
+
+
+b = Bike(15.0)
+c = Car(80.0,0.012)
+b.drive(100.0)
+c.drive(100.0)
+
+```
+
+
+
+来解释一下代码哈，
+
+```python
+#用代码块写，是因为有很多语法和md冲突了
+__init__ 这个函数在类被创建的时候自动调用，用来初始化类。它的参数，要在创建类的时候提供。于是我们通过提供一个数值来初始化speed的值。
+
+注意：__init__是python的内置方法，类似的函数名前后是两个下英文划线，如果写错了，则不会起到原本应有的作用。
+
+#class定义后面的括号里表示这个类继承于哪个类。Bike(Vehicle)就是说Bike是继承自Vehicle中的子类。Vehicle中的属性和方法，Bike都会有。因为Bike不需要有额外的功能，所以用pass在类中保留空块，什么都不用写。
+
+#Car类中，我们又重新定义了__init__和drive函数，这样会覆盖掉它继承自Vehicle的同名函数。但我们依然可以通过“Vehicle.函数名”来调用它的超类方法。以此来获得它作为Vehicle所具有的功能。注意，因为是通过类名调用方法，而不是像之前一样通过对象来调用，所以这里必须提供self的参数值。在调用超类的方法之后，我们又给Car增加了一个fuel属性，并且在drive中多输出一行信息。
+
+ 
+```
+
+最后，我们分别创建一个速度为15的自行车对象，和一个速度为80、耗油量为0.012的汽车，然后让它们去行驶100的距离。
+
+
+
+
+
+放上结果：
+
+```python
+>>> 
+ RESTART: C:/Users/yangj/AppData/Local/Programs/Python/Python36-32/test/test.py 
+need 6.666667 hour(s)
+need 1.250000 hour(s)
+need 1.250000 fuels
+>>> 
+```
+
+
+
+
+
+有没有点感觉了？
+
+我的理解哈
+
+> 面向对象就像是，设计一个角色模型
+>
+> 比如说，我要设计一个角色 叫ash，那么在Python中，这个类名字就叫ash
+>
+> 然后我要设计他的各种属性
+>
+> 比如三维 173 、145、18（×）
+>
+> 然后后面就可以直接在程序中很便捷的直接使用ash这个角色，包括了他的各项数据
+>
+> 面向过程和面向对象哪个好用，是根据复杂度来的
+>
+> 比如说，如果你要拿ash和Eden来比较长度（误）
+>
+> 那就直接面向过程，对比两个数据
+>
+> 那如果你要计算ash和Eden两个角色根据各个方面进行综合pk
+>
+> pk结果要根据各种数据包括体力，身高，体重，力量多数据综合比对
+>
+> 那这个时候面向过程就会特别繁琐
+>
+> 因为你需要定义 ash的体力、eden的体力、ash的身高...各种变量，工作量非常大
+>
+> 但是如果是面向对象，那就会简单很多，你只需要定义 身高，体重，体力这样的数据
+>
+> 就像游戏中的各种属性，不同的角色都在用
+>
+> 这样的情况下，很明显，面向对象更加简单
